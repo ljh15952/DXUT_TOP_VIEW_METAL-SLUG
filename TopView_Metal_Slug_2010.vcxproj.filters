@@ -51,6 +51,9 @@
     <Filter Include="GAME\Scene">
       <UniqueIdentifier>{ba875947-ce2f-4cd4-a808-b11174c8c6da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GAME\Bullet">
+      <UniqueIdentifier>{a3acdfe3-2357-4313-84a7-9c89315d78d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -146,6 +149,9 @@
     <ClCompile Include="MainScene.cpp">
       <Filter>GAME\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>GAME\Bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -186,6 +192,9 @@
     </ClInclude>
     <ClInclude Include="MainScene.h">
       <Filter>GAME\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>GAME\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

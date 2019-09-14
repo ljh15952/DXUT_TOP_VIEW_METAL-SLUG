@@ -21,7 +21,7 @@ void Camera::Update()
 		-cameraX, -cameraY, 0, 1);
 }
 
-void Camera::Follow(Sprite* following)
+void Camera::Follow(Node* following)
 {
 	this->following = following;
 }

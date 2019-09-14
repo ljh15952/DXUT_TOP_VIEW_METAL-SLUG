@@ -384,6 +384,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -392,6 +393,7 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Types.cpp" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Renderer.h" />

@@ -85,6 +85,7 @@ void Sprite::Draw()
 		return;
 
 	isUI ? Director::GetInstance()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND) : Director::GetInstance()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE);
+
 	Director::GetInstance()->GetSprite()->SetTransform(&GetMatrix());
 	D3DXVECTOR3 center = { texture->_info.Width * _pivot.x,texture->_info.Height * _pivot.y,0 };
 	Director::GetInstance()->GetSprite()->Draw(texture->_texture, nullptr, &center, NULL, _color);

@@ -21,7 +21,7 @@ D3DXMATRIX Node::GetMatrix()
 
 	if (_parent)
 	{
-		m *= _parent->GetMatrix();
+	//	m *= _parent->GetMatrix();
 	}
 
 	return m;

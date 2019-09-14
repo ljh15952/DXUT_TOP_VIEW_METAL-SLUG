@@ -6,7 +6,7 @@ class Camera : public Singleton<Camera>
 public:
 	void CameraInit();
 	void Update();
-	void Follow(Sprite* following);
+	void Follow(Node* following);
 	void Unfollow();
 	bool IsFollowing() const;
 	void SetTransform() const;
@@ -21,7 +21,7 @@ private:
 	D3DXMATRIX identityMatrix;
 	D3DXMATRIX viewMatrix;
 
-	Sprite* following;
+	Node* following;
 
 
 };

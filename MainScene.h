@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "Sprite.h"
 #include "Camera.h"
+#include "Bullet.h"
 class MainScene : public Scene
 {
 public:
@@ -11,5 +12,8 @@ public:
 
 	Sprite* S1;
 	Sprite* S2;
+
+	Sprite* _S1;
+
 };
 
