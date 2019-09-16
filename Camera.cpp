@@ -24,6 +24,7 @@ void Camera::Update()
 void Camera::Follow(Node* following)
 {
 	this->following = following;
+
 }
 
 void Camera::Unfollow()
@@ -36,11 +37,16 @@ bool Camera::IsFollowing() const
 	return this->following != nullptr;
 }
 
-void Camera::SetTransform() const
+void Camera::SetTransform() 
 {
 	if (!following)
 		return;
 
+//	static int a = 1280;
+	//static int b = 720;
+	//D3DXMatrixOrthoLH(&orthographicMatrix, a, -b, 0.0f, 1.0f);
+//	a+= 1;
+//	b += 1;
 	DXUTGetD3D9Device()->SetTransform(D3DTS_PROJECTION, &orthographicMatrix);
 	DXUTGetD3D9Device()->SetTransform(D3DTS_WORLD, &identityMatrix);
 	DXUTGetD3D9Device()->SetTransform(D3DTS_VIEW, &viewMatrix);

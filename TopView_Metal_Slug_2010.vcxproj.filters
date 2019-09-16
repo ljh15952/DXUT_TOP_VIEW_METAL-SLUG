@@ -54,6 +54,27 @@
     <Filter Include="GAME\Bullet">
       <UniqueIdentifier>{a3acdfe3-2357-4313-84a7-9c89315d78d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GAME\OBJ">
+      <UniqueIdentifier>{ea8c9d07-4913-4661-adf2-e063da0b3cd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME\OBJ\Obj">
+      <UniqueIdentifier>{00f7603b-d376-4185-9965-3f046580fa6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME\OBJ\Player">
+      <UniqueIdentifier>{ca9f4812-d4eb-4c28-b6d0-e68e407d559a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME\OBJ\Enemys">
+      <UniqueIdentifier>{1c55d375-912d-4cd9-9ca7-8fd9364ddeeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME\OBJ\Riding">
+      <UniqueIdentifier>{274990ad-81a5-49a8-8551-d89db1624799}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME\MiniMap">
+      <UniqueIdentifier>{358d6420-d436-4063-b901-844a459fda95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME\Item">
+      <UniqueIdentifier>{38adfd3c-0946-4fd6-8025-643703ee02d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -152,6 +173,15 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>GAME\Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GAME\OBJ\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj.cpp">
+      <Filter>GAME\OBJ\Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniMap.cpp">
+      <Filter>GAME\MiniMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -195,6 +225,15 @@
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>GAME\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>GAME\OBJ\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj.h">
+      <Filter>GAME\OBJ\Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniMap.h">
+      <Filter>GAME\MiniMap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

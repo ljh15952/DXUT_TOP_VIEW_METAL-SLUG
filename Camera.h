@@ -9,7 +9,7 @@ public:
 	void Follow(Node* following);
 	void Unfollow();
 	bool IsFollowing() const;
-	void SetTransform() const;
+	void SetTransform() ;
 
 	void SetPos(vector2 v) { cameraX = v.x, cameraY = v.y; };
 

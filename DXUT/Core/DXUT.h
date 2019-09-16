@@ -358,6 +358,13 @@ typedef D3DXCOLOR COLOR;
 
 using namespace std;
 
+enum P_shot_type
+{
+	pistol,
+	machine_gun,
+	youdo_missle,
+};
+
 #endif
 
 

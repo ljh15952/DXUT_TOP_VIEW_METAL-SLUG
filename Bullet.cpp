@@ -14,7 +14,6 @@ void Bullet::Update()
 		return;
 
 	_position += _v * 10;
-	_rotation = atan2(_v.y, _v.x);
 }
 
 
@@ -35,6 +34,7 @@ void Bullet_Manager::Shot_Bullet(vector2 startpos, vector2 v)
 		{
 			it->_position = startpos;
 			it->_v = v;
+			it->_rotation = atan2(v.y, v.x);
 			it->_visible = true;
 			return;
 		}

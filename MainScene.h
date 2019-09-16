@@ -3,6 +3,8 @@
 #include "Sprite.h"
 #include "Camera.h"
 #include "Bullet.h"
+#include "Player.h"
+#include "MiniMap.h"
 class MainScene : public Scene
 {
 public:
@@ -10,10 +12,10 @@ public:
 	void Update() override;
 	void OnExit() override;
 
-	Sprite* S1;
-	Sprite* S2;
 
-	Sprite* _S1;
+	Player* P;
+	Sprite* S2;
+	MiniMap* Minimap;
 
 };
 
