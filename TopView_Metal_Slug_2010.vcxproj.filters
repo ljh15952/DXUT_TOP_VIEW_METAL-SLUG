@@ -75,6 +75,9 @@
     <Filter Include="GAME\Item">
       <UniqueIdentifier>{38adfd3c-0946-4fd6-8025-643703ee02d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GAME\EnemyWeapon">
+      <UniqueIdentifier>{c1b273f9-340a-43a7-bc6c-acaec8e4451a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -182,6 +185,12 @@
     <ClCompile Include="MiniMap.cpp">
       <Filter>GAME\MiniMap</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy_1.cpp">
+      <Filter>GAME\OBJ\Enemys</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyWeapon.cpp">
+      <Filter>GAME\EnemyWeapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -234,6 +243,12 @@
     </ClInclude>
     <ClInclude Include="MiniMap.h">
       <Filter>GAME\MiniMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_1.h">
+      <Filter>GAME\OBJ\Enemys</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyWeapon.h">
+      <Filter>GAME\EnemyWeapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

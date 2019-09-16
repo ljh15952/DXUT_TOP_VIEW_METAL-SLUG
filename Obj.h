@@ -10,6 +10,9 @@ public:
 	//status
 	int Hp;
 	float Speed;
+
+	Ride_type RideType;
 	
+	vector2 v;
 };
 

@@ -11,7 +11,6 @@ public:
 
 	Sprite* ShotPos;
 
-	vector2 v;
 	bool isJump;
 	float jumpTimer;
 
@@ -21,5 +20,7 @@ public:
 	int youdo_missile_ammo;
 
 	float shot_timer;
+
+	bool iscol;
 };
 

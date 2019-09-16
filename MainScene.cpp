@@ -3,12 +3,12 @@
 //오늘 만들것! 인게임 관련된것들  
 //천천히 돌기? X
 //객체화 장해물,적,탈것
-//도망가는 적만들기
+//도망가는 적만들기 X
 //적 공격하고 적죽이기 체력 깎
 //적 지뢰놓기
 //적 지뢰밟으면 나도 죽기 체력 깎
-//총봐꾸기?
-//맵만들기(콜라이더 처리)
+//총봐꾸기? X
+//맵만들기(콜라이더 처리) X
 
 //일단은 플레이어 부터 만들자
 //플레이어가 하는것들
@@ -61,19 +61,22 @@
 void MainScene::Init()
 {
 	P = new Player;
-	P->_position = { -4200,4800 };
+	P->_position = { 10,10 };
 	this->AddChild(P, 1);
 
+	E = new Enemy_1(Ride_type::foot);
+	E->_position = { 4500,4500 };
+	this->AddChild(E, 1);
 
 	S2 = new Sprite;
 	S2->Create(L"asd.png");
+	S2->_pivot = { 0,0 };
 //	S2->_scale = { 0.2f,0.2f };
-	S2->_position = { 300,300 };
 	this->AddChild(S2, 0);
 
 	Bullet_Manager::GetInstance()->Make_Bullet();
 
-	Minimap = new MiniMap(P);
+	Minimap = new MiniMap(P,E);
 
 	Camera::GetInstance()->CameraInit();
 	Camera::GetInstance()->Follow(P);
@@ -86,17 +89,12 @@ void MainScene::Update()
 	Camera::GetInstance()->SetTransform();
 
 
-
-
-
-
-
 	//벽 충돌처리
 	RECT TEMP;
 	if (IntersectRect(&TEMP, &P->GetRect(), &S2->GetRect()))
 	{
 	//	S1->_position -= v * 5.1f;
-	}
+	}       
 	//
 
 	if (Director::GetInstance()->OnMouseDown())

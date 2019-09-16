@@ -5,6 +5,7 @@
 #include "Bullet.h"
 #include "Player.h"
 #include "MiniMap.h"
+#include "Enemy_1.h"
 class MainScene : public Scene
 {
 public:
@@ -16,6 +17,6 @@ public:
 	Player* P;
 	Sprite* S2;
 	MiniMap* Minimap;
-
+	Enemy_1 * E;
 };
 

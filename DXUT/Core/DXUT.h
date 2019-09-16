@@ -365,6 +365,13 @@ enum P_shot_type
 	youdo_missle,
 };
 
+enum Ride_type
+{
+	kickboard,
+	horse,
+	motercycle,
+	foot,
+};
 #endif
 
 

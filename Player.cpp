@@ -11,6 +11,7 @@ Player::Player()
 	ShotPos->_scale = { 0.1f,0.1f };
 	ShotPos->_position = { 100,100 };
 
+	RideType = Ride_type::foot;
 	Hp = 3;
 	Speed = 10;
 	isJump = false;
@@ -21,11 +22,21 @@ Player::Player()
 	machine_gun_ammo = 30; //
 	youdo_missile_ammo = 0;
 	shot_timer = 0.3f;
+
+	iscol = false;
+
 }
 
 void Player::Movement()
 {
-	v = { (float)Director::GetInstance()->p.x - 640 ,(float)Director::GetInstance()->p.y - 360 };
+	iscol = false;
+	if ((_position.x >= 9000 || _position.y >= 9000) || (_position.x <= 0 || _position.y <= 0))
+	{
+		_position -= v * (Speed + 0.1f);
+		iscol = true;
+	}        
+
+ 	v = { (float)Director::GetInstance()->p.x - 640 ,(float)Director::GetInstance()->p.y - 360 };
 	_rotation = atan2(v.y, v.x);
 
 	float l = sqrt(v.x * v.x + v.y * v.y);
@@ -41,7 +52,7 @@ void Player::Movement()
 		if (DXUTWasKeyPressed('Z'))
 			isJump = true;
 	}
-	else
+	else 
 	{
 		jumpTimer -= Time::deltaTime;
 		if (jumpTimer < 0)
