@@ -372,6 +372,20 @@ enum Ride_type
 	motercycle,
 	foot,
 };
+
+enum T_My_Type
+{
+	player,
+	enemy,
+};
+
+enum T_Player_AniState
+{
+	pistol_walk,
+	machinegun_walk,
+	machinegun_shot,
+	pistol_shot
+};
 #endif
 
 

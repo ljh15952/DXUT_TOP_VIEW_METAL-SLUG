@@ -58,6 +58,8 @@
 //10초마다 적 2명씩 생성? 적 10마리 잡으면 스테이지 클리어
 //2스테이지 디귿자 큰~킬에서 모든 적을 다 죽여야함
 //3스테이지 바다에서  보스전 보스를 따라가며 보스의 공격을 피하면서 공격 보트같은거 타고다녀야지
+
+
 void MainScene::Init()
 {
 	P = new Player;
@@ -75,6 +77,7 @@ void MainScene::Init()
 	this->AddChild(S2, 0);
 
 	Bullet_Manager::GetInstance()->Make_Bullet();
+	EnemyWeaponManager::GetInstance()->MakeEnemyWeapons();
 
 	Minimap = new MiniMap(P,E);
 
@@ -97,13 +100,31 @@ void MainScene::Update()
 	}       
 	//
 
+	for (auto it : Bullet_Manager::GetInstance()->_bullets)
+	{
+		if (it->_visible)
+		{
+			it->CollideBullet(P);
+			//for(auto it : Enemy_Manager::GetInstance()->_enemys)
+			//{
+			//		it->collideBullet(it);
+			//}
+			it->CollideBullet(E);
+		}
+	}
+
 	if (Director::GetInstance()->OnMouseDown())
 	{
-
+		P->isshot = true;
+		P->shot_timer = 0;
 	}
 	else if (Director::GetInstance()->OnMouse())
 	{
 		P->Attack();
+	}
+	else if (Director::GetInstance()->OnMouseUp())
+	{
+		P->isshot = false;
 	}
 }
 

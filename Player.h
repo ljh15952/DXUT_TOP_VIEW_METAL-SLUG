@@ -8,6 +8,7 @@ public:
 	void Movement() override;
 	void Attack() override;
 	void Update() override;
+	void isHit() override;
 
 	Sprite* ShotPos;
 
@@ -15,6 +16,8 @@ public:
 	float jumpTimer;
 
 	P_shot_type shot_type;
+	T_Player_AniState Anistate;
+
 
 	int machine_gun_ammo;
 	int youdo_missile_ammo;
@@ -22,5 +25,6 @@ public:
 	float shot_timer;
 
 	bool iscol;
+	bool isshot;
 };
 

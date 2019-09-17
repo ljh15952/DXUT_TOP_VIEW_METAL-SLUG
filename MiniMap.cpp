@@ -15,18 +15,18 @@ MiniMap::MiniMap(Player * p,Enemy_1 * e)
 	E = e;
 
 	player = new Sprite;
-	player->Create(L"a/Handgun_Walk 1.png");
+	player->Create(L"a/pistol/Handgun_Walk 1.png");
 	player->isUI = true;
-	cout << _position.x - (9000 * 0.03f) << endl;
-	player->_position = { _position.x - (9000 * 0.03f) ,0 };
+	cout << _position.x - (9850 * 0.03f) << endl;
+	player->_position = { _position.x - (9850 * 0.03f) ,0 };
 	player->_scale = { 0.5f,0.5f };
 
 
 	enemy = new Sprite;
 	enemy->Create(L"soldier1_gun.png");
 	enemy->isUI = true;
-	cout << _position.x - (9000 * 0.03f) << endl;
-	enemy->_position = { _position.x - (9000 * 0.03f) + (E->_position.x*0.03f) ,(E->_position.y * 0.03f) };
+	cout << _position.x - (9850 * 0.03f) << endl;
+	enemy->_position = { _position.x - (9850 * 0.03f) + (E->_position.x*0.03f) ,(E->_position.y * 0.03f) };
 	enemy->_scale = { 0.5f,0.5f };
 }
 
@@ -40,6 +40,6 @@ void MiniMap::Update()
 
 	enemy->_rotation = E->_rotation;
 	//enemy->_position += E->Speed * E->v * 0.03f;
-	enemy->_position = { _position.x - (9000 * 0.03f) + (E->_position.x * 0.03f) ,(E->_position.y * 0.03f) };
+	enemy->_position = { _position.x - (9850 * 0.03f) + (E->_position.x * 0.03f) ,(E->_position.y * 0.03f) };
 
 }

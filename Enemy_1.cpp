@@ -32,6 +32,8 @@ Enemy_1::Enemy_1(Ride_type RideT)
 	timer[0] = 5;
 	v = { 1,0 };
 
+
+	_mytype = T_My_Type::enemy;
 	atktimer = 3;
 }
 
@@ -41,7 +43,8 @@ void Enemy_1::Attack()
 	if (atktimer < 0)
 	{
 		cout << "지뢰나 쓰래기 던지기!!" << endl;
-		atktimer = 3;
+		EnemyWeaponManager::GetInstance()->EnemyShot(_position, v);
+		atktimer = 3.5f;
 	}
 	//지뢰나 쓰래기 던지기
 }
@@ -103,4 +106,9 @@ void Enemy_1::Update()
 {
 	Attack();
 	Movement();
+}
+
+void Enemy_1::isHit()
+{
+	cout << "ENEMY HIT!!" << endl;
 }

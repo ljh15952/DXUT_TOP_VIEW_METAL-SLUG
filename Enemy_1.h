@@ -1,5 +1,6 @@
 #pragma once
 #include "Obj.h"
+#include "EnemyWeapon.h"
 class Enemy_1 : public Obj
 {
 public:
@@ -7,7 +8,8 @@ public:
 	void Attack() override;
 	void Movement() override;
 	void Update() override;
-	
+	void isHit() override;
+
 	float timer[4];
 	float atktimer;
 };
