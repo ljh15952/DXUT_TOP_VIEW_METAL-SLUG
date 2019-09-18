@@ -31,7 +31,7 @@ bool Sprite::Animation(wstring path, int frame, float delay, int Aninum)
 	Timer += Time::deltaTime;
 	if (Timer >= delay)
 	{
-		if (this->Aninum == Aninum)
+		if (this->Aninum != Aninum)
 		{
 			this->Aninum = Aninum;
 			NowFrame = 0;
@@ -66,7 +66,6 @@ bool Sprite::GoTo(vector2 EndPos, float Speed)
 {
 	vector2 v = EndPos - _position;
 	float l = sqrt(v.x * v.x + v.y * v.y);
-
 	if (l < 10)
 		return true;
 	v.x /= l;

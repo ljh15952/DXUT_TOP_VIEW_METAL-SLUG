@@ -4,7 +4,7 @@
 Player::Player()
 {
 	Create(L"a/Walk/AR_walk 1.png");
-
+	_scale = { 1.7f,1.7f };
 
 	ShotPos = new Sprite;
 	ShotPos->Create(L"UFO_1.png");
@@ -84,7 +84,6 @@ void Player::Movement()
 void Player::Attack()
 {
 	shot_timer -= Time::deltaTime;
-
 	if (shot_timer < 0)
 	{
 		switch (shot_type)
@@ -93,12 +92,11 @@ void Player::Attack()
 			Bullet_Manager::GetInstance()->Shot_Bullet(ShotPos->_position, v,_mytype);
 			shot_timer = 0.3f;
 			Anistate = T_Player_AniState::pistol_shot;
-		break;
+			break;
 		case P_shot_type::machine_gun:
 			Anistate = T_Player_AniState::machinegun_shot;
 			if (machine_gun_ammo > 0)
 			{
-				cout << "SHOTMACHINEGUN";
 				Bullet_Manager::GetInstance()->Shot_Bullet(ShotPos->_position, { v.x,v.y }, _mytype);
 				machine_gun_ammo--;
 				shot_timer = 0.05f;
@@ -107,7 +105,6 @@ void Player::Attack()
 		case P_shot_type::youdo_missle:
 			if (youdo_missile_ammo > 0)
 			{
-				cout << "SHOTYOUDO";
 			}
 			break;
 		}
@@ -118,43 +115,72 @@ void Player::Update()
 {
 	Movement();
 
-	if (isshot)
+	if (RideType == Ride_type::foot)
 	{
-		switch (Anistate)
+		if (isshot)
 		{
-		case T_Player_AniState::pistol_shot:
-			cout << "SADASD" << endl;
-			Animation(L"a/pistol/Handgun_Walk ", 3, 0.1f, 1);
-			break;
-		case T_Player_AniState::machinegun_shot:
-			Animation(L"a/AR/AR_attack ", 3, 0.1f, 2);
-			break;
+			switch (Anistate)
+			{
+			case T_Player_AniState::pistol_shot:
+				Animation(L"a/pistol/Handgun_Walk ", 3, 0.1f, 1);
+				break;
+			case T_Player_AniState::machinegun_shot:
+				Animation(L"a/AR/AR_attack ", 3, 0.1f, 2);
+				break;
+
+			}
+		}
+		else
+		{
+			switch (shot_type)
+			{
+			case P_shot_type::pistol:
+				Animation(L"a/pistol/Handgun_Walk ", 3, 0.1f, 3);
+				break;
+			case P_shot_type::machine_gun:
+				Animation(L"a/Walk/AR_walk ", 3, 0.1f, 4);
+				break;
+			case  P_shot_type::youdo_missle:
+				break;
+			}
 		}
 	}
-	else
+	else if (RideType == Ride_type::kickboard)
 	{
-		switch (shot_type)
-		{
-		case P_shot_type::pistol:
-			Animation(L"a/pistol/Handgun_Walk ", 3, 0.1f, 3);
-			break;
-		case P_shot_type::machine_gun:
-			Animation(L"a/Walk/AR_walk ", 3, 0.1f, 4);
-			break;
-		case  P_shot_type::youdo_missle:
-			break;
-		}
+		Animation(L"k/Kickboard ", 4, 0.05f, 5);
 	}
+	else if (RideType == Ride_type::motercycle)
+	{
+		Animation(L"m/MotorCycle ", 4, 0.07f, 6);
+	}
+	else if (RideType == Ride_type::horse)
+	{
+		Animation(L"h/Horse ", 5, 0.07f, 7);
+	}
+
+
 	if (DXUTWasKeyPressed('1'))
+	{
 		shot_type = P_shot_type::pistol;
+		RideType = Ride_type::foot;
+	}
 	if (DXUTWasKeyPressed('2'))
 		shot_type = P_shot_type::machine_gun;
 	if (DXUTWasKeyPressed('3'))
 		shot_type = P_shot_type::youdo_missle;
-
+	if (DXUTWasKeyPressed('4'))
+		RideType = Ride_type::kickboard;
+	if (DXUTWasKeyPressed('5'))
+		RideType = Ride_type::motercycle;
+	if (DXUTWasKeyPressed('6'))
+		RideType = Ride_type::horse;
 }
 
 void Player::isHit()
 {
 	cout << "PLAYER HIT!!!!!!!" << endl;
+}
+
+void Player::Shot()
+{
 }

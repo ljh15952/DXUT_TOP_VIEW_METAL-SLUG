@@ -4,12 +4,13 @@
 Enemy_1::Enemy_1(Ride_type RideT)
 {
 	RideType = RideT;
+	_scale = { 1.7f,1.7f };
 
 	switch (RideT)
 	{
 	case Ride_type::foot:
 		//create(L"foot.png");
-		Create(L"soldier1_gun.png");
+		Create(L"E/Walk/w1.png");
 		Speed = 7;
 		break;
 	case Ride_type::horse:
@@ -25,16 +26,12 @@ Enemy_1::Enemy_1(Ride_type RideT)
 		break;
 	}
 
-	for (int i = 0; i < 4; i++)
-	{
-		timer[i] = 0;
-	}
-	timer[0] = 5;
 	v = { 1,0 };
 
 
 	_mytype = T_My_Type::enemy;
 	atktimer = 3;
+
 }
 
 void Enemy_1::Attack()
@@ -51,50 +48,35 @@ void Enemy_1::Attack()
 
 void Enemy_1::Movement()
 {
-	for (int i = 0; i < 4; i++)
+
+
+	if (GoTo({ GoPos + (v*2300) }, 500))
 	{
-		if (timer[i] > 0)
+		GoPos = _position;
+		int num = rand() % 4; // 0,1,2,3
+
+		if (_position.x > 8000)
+			num = 3;
+		else if(_position.x < 1000)
+			num = 0;
+		else if (_position.y < 1000)
+			num = 1;
+		else if (_position.y > 8000)
+			num = 2;
+		switch (num)
 		{
-			timer[i] -= Time::deltaTime;
-			switch (i)
-			{
-			case 0:
-				_position += v * Speed;
-				if (timer[0] < 0)
-				{
-					timer[1] = 5;
-					_rotation = -1.6f;
-					v = { 0,-1 };
-				}
-				break;
-			case 1:
-				_position += v * Speed;
-				if (timer[1] < 0)
-				{
-					timer[2] = 5;
-					_rotation = 3.1f;
-					v = { -1,0 };
-				}
-				break;
-			case 2:
-				_position += v * Speed;
-				if (timer[2] < 0)
-				{
-					timer[3] = 5;
-					_rotation = 1.55f;
-					v = { 0,1 };
-				}
-				break;
-			case 3:
-				_position += v * Speed;
-				if (timer[3] < 0)
-				{
-					timer[0] = 5;
-					_rotation = 0;
-					v = { 1,0 };
-				}
-				break;
-			}
+		case 0:
+			v = { 1,0 };
+			break;
+		case 1:
+			v = { 0,1 };
+			break;
+		case 2:
+			v = { 0,-1 };
+			break;
+		case 3:
+			v = { -1,0 };
+			break;
 		}
 	}
 
@@ -106,7 +88,9 @@ void Enemy_1::Update()
 {
 	Attack();
 	Movement();
-}
+
+	Animation(L"E/Walk/w", 4, 0.1f,1);
+}	
 
 void Enemy_1::isHit()
 {

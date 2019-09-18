@@ -18,7 +18,7 @@ public:
 	Player* P;
 	Sprite* S2;
 	MiniMap* Minimap;
-	Enemy_1 * E;
+	vector<Enemy_1 *> E;
 
 	vector<Sprite*> walls;
 };

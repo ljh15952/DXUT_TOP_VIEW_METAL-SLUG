@@ -18,6 +18,7 @@ public:
 	P_shot_type shot_type;
 	T_Player_AniState Anistate;
 
+	void Shot();
 
 	int machine_gun_ammo;
 	int youdo_missile_ammo;

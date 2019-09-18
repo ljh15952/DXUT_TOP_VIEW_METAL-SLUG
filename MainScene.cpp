@@ -71,17 +71,21 @@
 //이동수단별 스피드 밸런스 조절
 //역동적인 카메라
 //지뢰 vs 총알 , 지뢰 vs 플레이어 지뢰도그냥 총알로 만들자!!
-
+//적죽으면 맵에서 사라지게
 void MainScene::Init()
 {
 	P = new Player;
 	P->_position = { 2300,2300 };
 	this->AddChild(P, 1);
 
-	E = new Enemy_1(Ride_type::foot);
-	E->_position = { 4500,4500 };
-	this->AddChild(E, 1);
-
+	for (int i = 0; i < 2; i++)
+	{
+		Enemy_1 * e = new Enemy_1(Ride_type::foot);
+		e->_position = { 4930 ,4880 };
+		e->GoPos = e->_position;
+		this->AddChild(e, 1);
+		E.push_back(e);
+	}
 	S2 = new Sprite;
 	S2->Create(L"asd.png");
 	S2->_pivot = { 0,0 };
@@ -89,7 +93,7 @@ void MainScene::Init()
 	this->AddChild(S2, 0);
 
 	//set wall
-	for (int i = 0; i < 12; i++)
+	for (int i = 0; i < 13; i++)
 	{
 		Sprite* w = new Sprite;
 		w->Create(L"w.png");
@@ -115,7 +119,7 @@ void MainScene::Init()
 	EnemyWeaponManager::GetInstance()->MakeEnemyWeapons();
 
 	Minimap = new MiniMap(P,E);
-
+    
 	Camera::GetInstance()->CameraInit();
 	Camera::GetInstance()->Follow(P);
 }
@@ -126,8 +130,7 @@ void MainScene::Update()
 	Camera::GetInstance()->Update();
 	Camera::GetInstance()->SetTransform();
 
-	cout << P->_position.x << " " << P->_position.y << endl;
-
+//	cout << P->_position.x << " " << _position.y << endl;
 	//벽 충돌처리
 	for (auto it : walls)
 	{
@@ -141,14 +144,17 @@ void MainScene::Update()
 
 	for (auto it : Bullet_Manager::GetInstance()->_bullets)
 	{
-		if (it->_visible)
+		for (auto it2 : E)
 		{
-			it->CollideBullet(P);
-			//for(auto it : Enemy_Manager::GetInstance()->_enemys)
-			//{
-			//		it->collideBullet(it);
-			//}
-			it->CollideBullet(E);
+			if (it->_visible)
+			{
+				it->CollideBullet(P);
+				//for(auto it : Enemy_Manager::GetInstance()->_enemys)
+				//{
+				//		it->collideBullet(it);
+				//}
+				it->CollideBullet(it2);
+			}
 		}
 	}
 

@@ -10,7 +10,7 @@ public:
 	void Update() override;
 	void isHit() override;
 
-	float timer[4];
 	float atktimer;
+	vector2 GoPos;
 };
 

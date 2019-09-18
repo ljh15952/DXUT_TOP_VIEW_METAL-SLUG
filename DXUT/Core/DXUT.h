@@ -384,7 +384,10 @@ enum T_Player_AniState
 	pistol_walk,
 	machinegun_walk,
 	machinegun_shot,
-	pistol_shot
+	pistol_shot,
+	motorcycle_walk,
+	horse_walk,
+	kickboard_walk,
 };
 #endif
 

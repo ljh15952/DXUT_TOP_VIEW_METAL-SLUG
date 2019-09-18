@@ -16,6 +16,7 @@
 HRESULT CALLBACK OnD3D9CreateDevice(IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc,
 	void* pUserContext)
 {
+	srand(time(NULL));
 	Director::GetInstance()->Init();
 	return S_OK;
 }
