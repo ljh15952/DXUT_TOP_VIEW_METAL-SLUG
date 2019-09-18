@@ -60,10 +60,22 @@
 //3스테이지 바다에서  보스전 보스를 따라가며 보스의 공격을 피하면서 공격 보트같은거 타고다녀야지
 
 
+//벽 설치하기
+//플레이어 탈것 애니메이션추가
+//적 이동경로 잘 설정
+//적 스포너만들기
+//적과의거리뜨게 3초동안 거리가 100m이상일 경우 게임오버
+//UI 총알수 미션목표 등등.. 체력
+//아이템
+//점프기능 적 이동수단으로 갈아타기
+//이동수단별 스피드 밸런스 조절
+//역동적인 카메라
+//지뢰 vs 총알 , 지뢰 vs 플레이어 지뢰도그냥 총알로 만들자!!
+
 void MainScene::Init()
 {
 	P = new Player;
-	P->_position = { 10,10 };
+	P->_position = { 2300,2300 };
 	this->AddChild(P, 1);
 
 	E = new Enemy_1(Ride_type::foot);
@@ -75,6 +87,29 @@ void MainScene::Init()
 	S2->_pivot = { 0,0 };
 //	S2->_scale = { 0.2f,0.2f };
 	this->AddChild(S2, 0);
+
+	//set wall
+	for (int i = 0; i < 12; i++)
+	{
+		Sprite* w = new Sprite;
+		w->Create(L"w.png");
+		w->_visible = false;
+		walls.push_back(w);
+	}
+	walls[0]->_position = { 1150,1000 };
+	walls[1]->_position = { 6150,1000 };
+	walls[2]->_position = { 8650,1000 };
+	walls[3]->_position = { 3650,3600 };
+	walls[4]->_position = { 6200,3600 };
+	walls[5]->_position = { 8550,3600 };
+	walls[6]->_position = { 1250,6150 };
+	walls[7]->_position = { 3670,6150 };
+	walls[8]->_position = { 8650,6150 };
+	walls[9]->_position = { 1250,8750 };
+	walls[10]->_position = { 3670,8750 };
+	walls[11]->_position = { 6200,8750 };
+	walls[12]->_position = { 8670,8730 };
+	//
 
 	Bullet_Manager::GetInstance()->Make_Bullet();
 	EnemyWeaponManager::GetInstance()->MakeEnemyWeapons();
@@ -91,14 +126,18 @@ void MainScene::Update()
 	Camera::GetInstance()->Update();
 	Camera::GetInstance()->SetTransform();
 
+	cout << P->_position.x << " " << P->_position.y << endl;
 
 	//벽 충돌처리
-	RECT TEMP;
-	if (IntersectRect(&TEMP, &P->GetRect(), &S2->GetRect()))
+	for (auto it : walls)
 	{
-	//	S1->_position -= v * 5.1f;
-	}       
-	//
+		RECT TEMP;
+		if (IntersectRect(&TEMP, &P->GetRect(), &it->GetRect()))
+		{
+			P->_position -= P->v * P->Speed;
+			P->iscol = true;
+		}
+	}
 
 	for (auto it : Bullet_Manager::GetInstance()->_bullets)
 	{
