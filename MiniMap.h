@@ -5,13 +5,11 @@
 class MiniMap : public Sprite
 {
 public:
-	MiniMap(Player* p, vector<Enemy_1*> e);
+	MiniMap(Player* p);
 	void Update() override;
 	Sprite* player;
-//	Sprite* enemy;
 
 	Player* P;
 	vector<Sprite*> E;
-	vector<Enemy_1*>e;
 };
 

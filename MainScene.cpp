@@ -60,9 +60,9 @@
 //3스테이지 바다에서  보스전 보스를 따라가며 보스의 공격을 피하면서 공격 보트같은거 타고다녀야지
 
 
-//벽 설치하기
-//플레이어 탈것 애니메이션추가
-//적 이동경로 잘 설정
+//벽 설치하기 OK
+//플레이어 탈것 애니메이션추가 OK
+//적 이동경로 잘 설정 OK
 //적 스포너만들기
 //적과의거리뜨게 3초동안 거리가 100m이상일 경우 게임오버
 //UI 총알수 미션목표 등등.. 체력
@@ -71,26 +71,28 @@
 //이동수단별 스피드 밸런스 조절
 //역동적인 카메라
 //지뢰 vs 총알 , 지뢰 vs 플레이어 지뢰도그냥 총알로 만들자!!
-//적죽으면 맵에서 사라지게
+//적죽으면 맵에서 사라지게 OK
+//적여러종류추가
 void MainScene::Init()
 {
 	P = new Player;
 	P->_position = { 2300,2300 };
 	this->AddChild(P, 1);
 
-	for (int i = 0; i < 2; i++)
-	{
-		Enemy_1 * e = new Enemy_1(Ride_type::foot);
-		e->_position = { 4930 ,4880 };
-		e->GoPos = e->_position;
-		this->AddChild(e, 1);
-		E.push_back(e);
-	}
+	
+	
+
 	S2 = new Sprite;
 	S2->Create(L"asd.png");
 	S2->_pivot = { 0,0 };
 //	S2->_scale = { 0.2f,0.2f };
 	this->AddChild(S2, 0);
+
+	EnemyManager::GetInstance()->Make_Enemy();
+	for (int i = 0; i < 30; i++)
+	{
+		EnemyManager::GetInstance()->SetEnemy({ 4930,4880 }, Ride_type::foot);
+	}
 
 	//set wall
 	for (int i = 0; i < 13; i++)
@@ -118,7 +120,7 @@ void MainScene::Init()
 	Bullet_Manager::GetInstance()->Make_Bullet();
 	EnemyWeaponManager::GetInstance()->MakeEnemyWeapons();
 
-	Minimap = new MiniMap(P,E);
+	Minimap = new MiniMap(P);
     
 	Camera::GetInstance()->CameraInit();
 	Camera::GetInstance()->Follow(P);
@@ -144,7 +146,7 @@ void MainScene::Update()
 
 	for (auto it : Bullet_Manager::GetInstance()->_bullets)
 	{
-		for (auto it2 : E)
+		for (auto it2 : EnemyManager::GetInstance()->_enemys)
 		{
 			if (it->_visible)
 			{
@@ -153,7 +155,10 @@ void MainScene::Update()
 				//{
 				//		it->collideBullet(it);
 				//}
-				it->CollideBullet(it2);
+				if (it2->_visible)
+				{
+					it->CollideBullet(it2);
+				}
 			}
 		}
 	}

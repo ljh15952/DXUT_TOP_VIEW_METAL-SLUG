@@ -1,37 +1,48 @@
 #include "DXUT.h"
 #include "Enemy_1.h"
 
-Enemy_1::Enemy_1(Ride_type RideT)
+//enemy manager ȭ
+
+Enemy_1::Enemy_1()
 {
-	RideType = RideT;
 	_scale = { 1.7f,1.7f };
+	_visible = false;
+	Create(L"E/Walk/w1.png");
 
-	switch (RideT)
-	{
-	case Ride_type::foot:
-		//create(L"foot.png");
-		Create(L"E/Walk/w1.png");
-		Speed = 7;
-		break;
-	case Ride_type::horse:
-		//create(L"horse.png");
+	mini = new Sprite;
+	mini->Create(L"E/Walk/w1.png");
+	mini->_visible = false;
+	mini->_scale = { 0.5f,0.5f };
+	mini->isUI = true;
+	mini->_layer = 5;
 
-		break;
-	case Ride_type::kickboard:
-		//create(L"kickboard.png");
+	//switch (RideT)
+	//{
+	//case Ride_type::foot:
+	//	//create(L"foot.png");
+	//	Create(L"E/Walk/w1.png");
+	//	Speed = 7;
+	//	break;
+	//case Ride_type::horse:
+	//	//create(L"horse.png");
 
-		break;
-	case Ride_type::motercycle:
-		//create(L"motercycle.png");
-		break;
-	}
+	//	break;
+	//case Ride_type::kickboard:
+	//	//create(L"kickboard.png");
+
+	//	break;
+	//case Ride_type::motercycle:
+	//	//create(L"motercycle.png");
+	//	break;
+	//}
 
 	v = { 1,0 };
 
 
 	_mytype = T_My_Type::enemy;
 	atktimer = 3;
-
+	Hp = 3;
+	isDie = false;
 }
 
 void Enemy_1::Attack()
@@ -48,9 +59,8 @@ void Enemy_1::Attack()
 
 void Enemy_1::Movement()
 {
-
-
-	if (GoTo({ GoPos + (v*2300) }, 500))
+	cout << 100 * (rand() % 5 + 3) << endl;
+	if (GoTo({ GoPos + (v*2300) }, 100 * (rand()%5+5)))
 	{
 		GoPos = _position;
 		int num = rand() % 4; // 0,1,2,3
@@ -86,13 +96,78 @@ void Enemy_1::Movement()
 
 void Enemy_1::Update()
 {
-	Attack();
-	Movement();
+	if (!_visible)
+		return;
+	
+	if (isDie)
+	{
+		if (Animation(L"E/Die/d", 4, 0.2f, 2))
+		{
+			isDie = false;
+			_visible = false;
+		}
+	}
+	else
+	{
+		//	Attack();
+		Movement();
+		Animation(L"E/Walk/w", 4, 0.1f, 1);
+	}
 
-	Animation(L"E/Walk/w", 4, 0.1f,1);
 }	
 
 void Enemy_1::isHit()
 {
+	Hp--;
+	if (Hp < 0)
+	{
+	//	_visible = false;
+		isDie = true;
+		mini->_visible = false;
+	}
 	cout << "ENEMY HIT!!" << endl;
+}
+
+
+void EnemyManager::Make_Enemy()
+{
+	for (int i = 0; i < 30; i++)
+	{
+		Enemy_1* E = new Enemy_1;
+		_enemys.push_back(E);
+	}
+}
+
+void EnemyManager::SetEnemy(vector2 pos, Ride_type rt)
+{
+	for (auto it : _enemys)
+	{
+		if (!it->_visible)
+		{
+			it->_position = pos;
+			it->RideType = rt;
+			it->GoPos = pos;
+			it->_visible = true;
+			it->mini->_visible = true;
+			return;
+		}
+	}
+}
+
+void EnemyManager::Delete_Enemys()
+{
+	for (auto it : _enemys)
+		delete it;
+	_enemys.clear();
+}
+
+void EnemyManager::SetOff_Enemy(Enemy_1* e)
+{
+	for (auto it : _enemys)
+	{
+		if (it == e)
+		{
+			it->_visible = false;
+		}
+	}
 }

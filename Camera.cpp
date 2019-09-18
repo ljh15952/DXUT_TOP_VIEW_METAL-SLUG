@@ -4,7 +4,7 @@
 
 void Camera::CameraInit()
 {
-	D3DXMatrixOrthoLH(&orthographicMatrix, 1280, -720, 0.0f, 1.0f);
+	D3DXMatrixOrthoLH(&orthographicMatrix, 1280 * 2.5f, -720 *2.5f, 0.0f, 1.0f);
 	D3DXMatrixIdentity(&identityMatrix);
 	following = nullptr;
 }
