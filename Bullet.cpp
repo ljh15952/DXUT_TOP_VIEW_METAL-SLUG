@@ -3,8 +3,8 @@
 
 Bullet::Bullet()
 {
-	Create(L"Weapon.png");
-	_scale = { 0.5f,0.5f };
+	Create(L"N_A.png");
+	_scale = { 0.2f,0.2f };
 	_visible = false;
 }
 

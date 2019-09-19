@@ -19,6 +19,8 @@ public:
 	Sprite* S2;
 	MiniMap* Minimap;
 
+	float spawntimer;
+
 	vector<Sprite*> walls;
 };
 

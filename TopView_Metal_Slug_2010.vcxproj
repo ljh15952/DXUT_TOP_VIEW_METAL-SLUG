@@ -387,6 +387,7 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="EnemyWeapon.cpp" />
     <ClCompile Include="Enemy_1.cpp" />
+    <ClCompile Include="GM.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="MiniMap.cpp" />
     <ClCompile Include="Node.cpp" />
@@ -401,6 +402,7 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="EnemyWeapon.h" />
     <ClInclude Include="Enemy_1.h" />
+    <ClInclude Include="GM.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="MiniMap.h" />
     <ClInclude Include="Node.h" />

@@ -63,24 +63,45 @@
 //벽 설치하기 OK
 //플레이어 탈것 애니메이션추가 OK
 //적 이동경로 잘 설정 OK
-//적 스포너만들기
-//적과의거리뜨게 3초동안 거리가 100m이상일 경우 게임오버
-//UI 총알수 미션목표 등등.. 체력
+//적 스포너만들기 OK
+//적과의거리뜨게 3초동안 거리가 100m이상일 경우 게임오버 no      
+//UI 총알수 미션목표 등등.. 체력        
 //아이템
 //점프기능 적 이동수단으로 갈아타기
 //이동수단별 스피드 밸런스 조절
 //역동적인 카메라
 //지뢰 vs 총알 , 지뢰 vs 플레이어 지뢰도그냥 총알로 만들자!!
+//코드 정리?
 //적죽으면 맵에서 사라지게 OK
 //적여러종류추가
+
+//쓰래기설치 지뢰 던지기 **
+//점프해서봐꾸기시스템 **
+//아이템 쓰래기 뿌시면나오는거 **
+//쓰래기나 지뢰 충돌처리 주인공이랑 **
+//엄청난 UI들
+
+//게임목표 1스테이지 클리어 조건
+//게임어떠케시작할지 게임어떠떠케끝날지 처음에 2명을 쫓아가면서 스토리뜨면시작
+//화면가운데위에 미션이뜸 
+//마지막에 하천쪽으로이동하면서 끝
 void MainScene::Init()
 {
 	P = new Player;
 	P->_position = { 2300,2300 };
 	this->AddChild(P, 1);
 
+	//2450 2350
+	//4900 2350
+	//7350 2350
+
+	//2400 4880
+	//4930 4880
+	//7430 4880
 	
-	
+	//2500 7450
+	//4900 7450
+	//7420 7450
 
 	S2 = new Sprite;
 	S2->Create(L"asd.png");
@@ -89,12 +110,12 @@ void MainScene::Init()
 	this->AddChild(S2, 0);
 
 	EnemyManager::GetInstance()->Make_Enemy();
-	for (int i = 0; i < 30; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		EnemyManager::GetInstance()->SetEnemy({ 4930,4880 }, Ride_type::foot);
 	}
 
-	//set wall
+	//set wall            
 	for (int i = 0; i < 13; i++)
 	{
 		Sprite* w = new Sprite;
@@ -124,15 +145,44 @@ void MainScene::Init()
     
 	Camera::GetInstance()->CameraInit();
 	Camera::GetInstance()->Follow(P);
+
+	spawntimer = 1;
 }
 
 void MainScene::Update()
 {
+	//카메라 업데이트
 	Camera::GetInstance()->SetPos({ P->_position.x , P->_position.y });
 	Camera::GetInstance()->Update();
 	Camera::GetInstance()->SetTransform();
+	//
 
-//	cout << P->_position.x << " " << _position.y << endl;
+	//적 스포너
+	spawntimer -= Time::deltaTime;
+	if (spawntimer < 0)
+	{
+		vector2 v = { 2450 * float(rand() % 3 + 1),2450 * float(rand() % 3 + 1) };
+		switch (rand() % 3)
+		{
+		case 0:
+			cout << "!" << endl;
+			EnemyManager::GetInstance()->SetEnemy(v, Ride_type::foot);
+			break;
+		case 1:
+			cout << "2" << endl;
+
+			EnemyManager::GetInstance()->SetEnemy(v, Ride_type::motercycle);
+			break;
+		case 2:
+			cout << "3" << endl;
+
+			EnemyManager::GetInstance()->SetEnemy(v, Ride_type::horse);
+			break;
+		}
+		spawntimer = 1;
+	}
+	//
+
 	//벽 충돌처리
 	for (auto it : walls)
 	{
@@ -155,7 +205,7 @@ void MainScene::Update()
 				//{
 				//		it->collideBullet(it);
 				//}
-				if (it2->_visible)
+				if (it2->_visible && !it2->isDie)
 				{
 					it->CollideBullet(it2);
 				}

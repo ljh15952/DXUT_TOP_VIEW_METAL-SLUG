@@ -7,41 +7,20 @@ Enemy_1::Enemy_1()
 {
 	_scale = { 1.7f,1.7f };
 	_visible = false;
-	Create(L"E/Walk/w1.png");
 
 	mini = new Sprite;
-	mini->Create(L"E/Walk/w1.png");
 	mini->_visible = false;
 	mini->_scale = { 0.5f,0.5f };
 	mini->isUI = true;
 	mini->_layer = 5;
 
-	//switch (RideT)
-	//{
-	//case Ride_type::foot:
-	//	//create(L"foot.png");
-	//	Create(L"E/Walk/w1.png");
-	//	Speed = 7;
-	//	break;
-	//case Ride_type::horse:
-	//	//create(L"horse.png");
-
-	//	break;
-	//case Ride_type::kickboard:
-	//	//create(L"kickboard.png");
-
-	//	break;
-	//case Ride_type::motercycle:
-	//	//create(L"motercycle.png");
-	//	break;
-	//}
-
+	
 	v = { 1,0 };
 
 
 	_mytype = T_My_Type::enemy;
 	atktimer = 3;
-	Hp = 3;
+	Hp = 1;
 	isDie = false;
 }
 
@@ -59,8 +38,7 @@ void Enemy_1::Attack()
 
 void Enemy_1::Movement()
 {
-	cout << 100 * (rand() % 5 + 3) << endl;
-	if (GoTo({ GoPos + (v*2300) }, 100 * (rand()%5+5)))
+	if (GoTo({ GoPos + (v*2300) }, 100 * Speed))
 	{
 		GoPos = _position;
 		int num = rand() % 4; // 0,1,2,3
@@ -101,7 +79,7 @@ void Enemy_1::Update()
 	
 	if (isDie)
 	{
-		if (Animation(L"E/Die/d", 4, 0.2f, 2))
+		if (Animation(DieAnipath, 4, 0.2f, 2))
 		{
 			isDie = false;
 			_visible = false;
@@ -111,7 +89,7 @@ void Enemy_1::Update()
 	{
 		//	Attack();
 		Movement();
-		Animation(L"E/Walk/w", 4, 0.1f, 1);
+		Animation(MoveAnipath, 4, 0.1f, 1);
 	}
 
 }	
@@ -126,6 +104,30 @@ void Enemy_1::isHit()
 		mini->_visible = false;
 	}
 	cout << "ENEMY HIT!!" << endl;
+}
+
+void Enemy_1::SetEnemy()
+{
+	switch (RideType)
+	{
+	case Ride_type::foot:
+		MoveAnipath = L"E/Yakuza 1/Walk/w";
+		DieAnipath = L"E/Yakuza 1/Die/d";
+		Speed = 3;
+		break;
+	case Ride_type::horse:
+		MoveAnipath = L"E/Yakuza 2/Walk 2/w";
+		DieAnipath = L"E/Yakuza 2/Die 2/d";
+		Speed = 5;
+		break;
+	case Ride_type::motercycle:
+		MoveAnipath = L"E/Yakuza 3/Walk 3/w";
+		DieAnipath = L"E/Yakuza 3/Die 3/d";
+		Speed = 6;
+		break;
+	}
+	Create(MoveAnipath + L"1.png");
+	mini->Create(MoveAnipath + L"1.png");
 }
 
 
@@ -149,6 +151,7 @@ void EnemyManager::SetEnemy(vector2 pos, Ride_type rt)
 			it->GoPos = pos;
 			it->_visible = true;
 			it->mini->_visible = true;
+			it->SetEnemy();
 			return;
 		}
 	}

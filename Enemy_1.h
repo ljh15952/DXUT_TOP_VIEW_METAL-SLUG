@@ -13,11 +13,16 @@ public:
 
 	Sprite* mini;
 
+	void SetEnemy();
 
 	bool isDie;
 
 	float atktimer;
 	vector2 GoPos;
+
+	wstring MoveAnipath;
+	wstring DieAnipath;
+
 };
 
 class EnemyManager : public Singleton<EnemyManager>

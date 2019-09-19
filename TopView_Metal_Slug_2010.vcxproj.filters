@@ -78,6 +78,9 @@
     <Filter Include="GAME\EnemyWeapon">
       <UniqueIdentifier>{c1b273f9-340a-43a7-bc6c-acaec8e4451a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GAME\GM">
+      <UniqueIdentifier>{ea9a1aeb-3a09-42a4-a400-4c6186950182}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -191,6 +194,9 @@
     <ClCompile Include="EnemyWeapon.cpp">
       <Filter>GAME\EnemyWeapon</Filter>
     </ClCompile>
+    <ClCompile Include="GM.cpp">
+      <Filter>GAME\GM</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -249,6 +255,9 @@
     </ClInclude>
     <ClInclude Include="EnemyWeapon.h">
       <Filter>GAME\EnemyWeapon</Filter>
+    </ClInclude>
+    <ClInclude Include="GM.h">
+      <Filter>GAME\GM</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
