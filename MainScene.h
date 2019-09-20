@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "MiniMap.h"
 #include "Enemy_1.h"
+#include "UI.h"
 class MainScene : public Scene
 {
 public:

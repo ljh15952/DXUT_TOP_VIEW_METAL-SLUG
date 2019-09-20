@@ -88,7 +88,13 @@
 
 //미니맵 주인공 파란색 화살표로 적들은 어케할까 
 //지뢰크기 up 깜빡이는 애니메이션
+//미션 1스프라이트에서 1때서주기
 
+
+//미션1 야쿠자들을 죽여라! 남은적 : 2
+//미션2 말을 탄 야쿠자들을 빨리 죽여라! 남은적 : 3
+//미션3 오토바이 야쿠자들을 빨리 죽여라! 남은적 :4
+//미션4 모든 야쿠자들을 빨리 죽여라! 남은적 : 10
 void MainScene::Init()
 {
 	P = new Player;
@@ -144,6 +150,9 @@ void MainScene::Init()
     
 	Camera::GetInstance()->CameraInit();
 	Camera::GetInstance()->Follow(P);
+
+
+	UI::GetInstance()->UI_Init();
 
 	spawntimer = 1;
 }
