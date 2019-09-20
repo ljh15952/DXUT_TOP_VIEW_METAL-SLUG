@@ -84,30 +84,30 @@
 //게임목표 1스테이지 클리어 조건
 //게임어떠케시작할지 게임어떠떠케끝날지 처음에 2명을 쫓아가면서 스토리뜨면시작
 //화면가운데위에 미션이뜸 
-//마지막에 하천쪽으로이동하면서 끝
+//마지막에 하천쪽으로이동하면서 끝    
+
+//미니맵 주인공 파란색 화살표로 적들은 어케할까 
+//지뢰크기 up 깜빡이는 애니메이션
+
 void MainScene::Init()
 {
 	P = new Player;
 	P->_position = { 2300,2300 };
 	this->AddChild(P, 1);
 
-	//2450 2350
-	//4900 2350
-	//7350 2350
-
-	//2400 4880
-	//4930 4880
-	//7430 4880
-	
-	//2500 7450
-	//4900 7450
-	//7420 7450
-
 	S2 = new Sprite;
 	S2->Create(L"asd.png");
 	S2->_pivot = { 0,0 };
 //	S2->_scale = { 0.2f,0.2f };
 	this->AddChild(S2, 0);
+
+
+	feulSp = new Sprite;
+	feulSp->Create(L"fuel.png");
+	feulSp->_position = { 100,100 };
+	feulSp->_pivot = { 0,0 };
+	feulSp->isUI = true;
+
 
 	EnemyManager::GetInstance()->Make_Enemy();
 	for (int i = 0; i < 2; i++)
@@ -139,7 +139,6 @@ void MainScene::Init()
 	//
 
 	Bullet_Manager::GetInstance()->Make_Bullet();
-	EnemyWeaponManager::GetInstance()->MakeEnemyWeapons();
 
 	Minimap = new MiniMap(P);
     
@@ -157,6 +156,8 @@ void MainScene::Update()
 	Camera::GetInstance()->SetTransform();
 	//
 
+	feulSp->_scale.x = P->feul / 10;
+
 	//적 스포너
 	spawntimer -= Time::deltaTime;
 	if (spawntimer < 0)
@@ -165,17 +166,12 @@ void MainScene::Update()
 		switch (rand() % 3)
 		{
 		case 0:
-			cout << "!" << endl;
 			EnemyManager::GetInstance()->SetEnemy(v, Ride_type::foot);
 			break;
 		case 1:
-			cout << "2" << endl;
-
 			EnemyManager::GetInstance()->SetEnemy(v, Ride_type::motercycle);
 			break;
 		case 2:
-			cout << "3" << endl;
-
 			EnemyManager::GetInstance()->SetEnemy(v, Ride_type::horse);
 			break;
 		}
@@ -193,12 +189,34 @@ void MainScene::Update()
 			P->iscol = true;
 		}
 	}
+	//
+
+	//플레이어 점프 충돌처리
+	if (P->isJump)
+	{
+		for (auto it : EnemyManager::GetInstance()->_enemys)
+		{
+			if (it->_visible && it->isDie)
+			{
+				RECT TEMP;
+				if (IntersectRect(&TEMP, &P->GetRect(), &it->GetRect()))
+				{
+					//it->_visible = false;
+					P->RideType = it->RideType;
+
+					if(P->RideType != Ride_type::foot)
+						P->feul = 10;
+				}
+			}
+		}
+	}
+	//
 
 	for (auto it : Bullet_Manager::GetInstance()->_bullets)
 	{
 		for (auto it2 : EnemyManager::GetInstance()->_enemys)
 		{
-			if (it->_visible)
+			if (it->_visible && !it->isHit)
 			{
 				it->CollideBullet(P);
 				//for(auto it : Enemy_Manager::GetInstance()->_enemys)

@@ -1,7 +1,7 @@
 #pragma once
 #include "Obj.h"
-#include "EnemyWeapon.h"
 #include "Types.h"
+#include "Bullet.h"
 class Enemy_1 : public Obj
 {
 public:

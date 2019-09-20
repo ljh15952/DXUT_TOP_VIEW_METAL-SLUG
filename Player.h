@@ -12,6 +12,7 @@ public:
 
 	Sprite* ShotPos;
 
+
 	bool isJump;
 	float jumpTimer;
 
@@ -27,5 +28,7 @@ public:
 
 	bool iscol;
 	bool isshot;
+
+	float feul;
 };
 

@@ -385,7 +385,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="EnemyWeapon.cpp" />
     <ClCompile Include="Enemy_1.cpp" />
     <ClCompile Include="GM.cpp" />
     <ClCompile Include="MainScene.cpp" />
@@ -399,8 +398,8 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Types.cpp" />
+    <ClCompile Include="UI.cpp" />
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="EnemyWeapon.h" />
     <ClInclude Include="Enemy_1.h" />
     <ClInclude Include="GM.h" />
     <ClInclude Include="MainScene.h" />
@@ -414,6 +413,7 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Types.h" />
+    <ClInclude Include="UI.h" />
     <None Include="DXUT\Optional\directx.ico" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Director.h" />

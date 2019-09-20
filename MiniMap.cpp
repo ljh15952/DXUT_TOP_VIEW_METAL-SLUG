@@ -14,7 +14,6 @@ MiniMap::MiniMap(Player * p)
 	player = new Sprite;
 	player->Create(L"a/pistol/Handgun_Walk 1.png");
 	player->isUI = true;
-	cout << _position.x - (9850 * 0.03f) << endl;
 	player->_position = { _position.x - (9850 * 0.03f) + (P->_position.x * 0.03f) ,(P->_position.y * 0.03f) };
 	player->_scale = { 0.5f,0.5f };
 

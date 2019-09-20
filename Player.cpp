@@ -11,6 +11,7 @@ Player::Player()
 	ShotPos->_scale = { 0.1f,0.1f };
 	ShotPos->_position = { 100,100 };
 
+
 	RideType = Ride_type::foot;
 	Hp = 3;
 	Speed = 10;
@@ -20,12 +21,14 @@ Player::Player()
 	shot_type = P_shot_type::pistol;
 	_mytype = T_My_Type::player;
 
-	machine_gun_ammo = 30; //
+	machine_gun_ammo = 500; //
 	youdo_missile_ammo = 0;
 	shot_timer = 0.3f;
 
 	iscol = false;
 	isshot = false;
+
+	feul = 0;
 
 	Anistate = T_Player_AniState::pistol_walk;
 
@@ -113,6 +116,14 @@ void Player::Attack()
 
 void Player::Update()
 {
+	if(RideType != Ride_type::foot)
+		feul -= Time::deltaTime;
+
+	if (feul < 0)
+	{
+		RideType = Ride_type::foot;
+	}
+
 	Movement();
 
 	if (RideType == Ride_type::foot)

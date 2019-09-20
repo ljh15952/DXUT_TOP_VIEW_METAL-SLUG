@@ -75,11 +75,11 @@
     <Filter Include="GAME\Item">
       <UniqueIdentifier>{38adfd3c-0946-4fd6-8025-643703ee02d2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GAME\EnemyWeapon">
-      <UniqueIdentifier>{c1b273f9-340a-43a7-bc6c-acaec8e4451a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GAME\GM">
       <UniqueIdentifier>{ea9a1aeb-3a09-42a4-a400-4c6186950182}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME\UI">
+      <UniqueIdentifier>{2bfd78d1-db57-4189-bed8-68a80b5f5f70}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -191,11 +191,11 @@
     <ClCompile Include="Enemy_1.cpp">
       <Filter>GAME\OBJ\Enemys</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyWeapon.cpp">
-      <Filter>GAME\EnemyWeapon</Filter>
-    </ClCompile>
     <ClCompile Include="GM.cpp">
       <Filter>GAME\GM</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>GAME\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -253,11 +253,11 @@
     <ClInclude Include="Enemy_1.h">
       <Filter>GAME\OBJ\Enemys</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyWeapon.h">
-      <Filter>GAME\EnemyWeapon</Filter>
-    </ClInclude>
     <ClInclude Include="GM.h">
       <Filter>GAME\GM</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>GAME\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

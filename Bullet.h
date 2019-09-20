@@ -10,6 +10,10 @@ public:
 	vector2 _v;
 	void CollideBullet(Obj* obj);
 	T_My_Type _mytype;
+	void SetBullet();
+	bool isHit;
+	wstring DieAnipath;
+
 };
 
 class Bullet_Manager : public Singleton<Bullet_Manager>

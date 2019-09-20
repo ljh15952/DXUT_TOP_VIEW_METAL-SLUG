@@ -29,8 +29,7 @@ void Enemy_1::Attack()
 	atktimer -= Time::deltaTime;
 	if (atktimer < 0)
 	{
-		cout << "지뢰나 쓰래기 던지기!!" << endl;
-		EnemyWeaponManager::GetInstance()->EnemyShot(_position, v);
+		Bullet_Manager::GetInstance()->Shot_Bullet(_position, v, _mytype);
 		atktimer = 3.5f;
 	}
 	//지뢰나 쓰래기 던지기
@@ -87,7 +86,7 @@ void Enemy_1::Update()
 	}
 	else
 	{
-		//	Attack();
+		Attack();
 		Movement();
 		Animation(MoveAnipath, 4, 0.1f, 1);
 	}
@@ -99,11 +98,9 @@ void Enemy_1::isHit()
 	Hp--;
 	if (Hp < 0)
 	{
-	//	_visible = false;
 		isDie = true;
 		mini->_visible = false;
 	}
-	cout << "ENEMY HIT!!" << endl;
 }
 
 void Enemy_1::SetEnemy()

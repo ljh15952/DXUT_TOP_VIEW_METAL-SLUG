@@ -6,7 +6,6 @@
 #include "Player.h"
 #include "MiniMap.h"
 #include "Enemy_1.h"
-#include "EnemyWeapon.h"
 class MainScene : public Scene
 {
 public:
@@ -18,6 +17,8 @@ public:
 	Player* P;
 	Sprite* S2;
 	MiniMap* Minimap;
+
+	Sprite* feulSp;
 
 	float spawntimer;
 
