@@ -81,6 +81,9 @@
     <Filter Include="GAME\UI">
       <UniqueIdentifier>{2bfd78d1-db57-4189-bed8-68a80b5f5f70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GAME\OBJ\Trash">
+      <UniqueIdentifier>{e4edc587-25ea-448c-be0d-432af7ce9f2e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -197,6 +200,9 @@
     <ClCompile Include="UI.cpp">
       <Filter>GAME\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Trash.cpp">
+      <Filter>GAME\OBJ\Trash</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -258,6 +264,9 @@
     </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>GAME\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Trash.h">
+      <Filter>GAME\OBJ\Trash</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

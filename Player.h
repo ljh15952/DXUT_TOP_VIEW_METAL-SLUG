@@ -1,6 +1,7 @@
 #pragma once
 #include "Obj.h"
 #include "Bullet.h"
+#include "UI.h"
 class Player : public Obj
 {
 public:
@@ -28,6 +29,7 @@ public:
 
 	bool iscol;
 	bool isshot;
+	bool isoil;
 
 	float feul;
 };

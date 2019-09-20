@@ -3,6 +3,7 @@
 class GM : public Singleton<GM>
 {
 public:
-
+	void SpawnEnemy(int howmany);
+	void SetCamera();
 };
 

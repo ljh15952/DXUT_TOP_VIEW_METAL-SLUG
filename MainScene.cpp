@@ -110,7 +110,7 @@ void MainScene::Init()
 
 	feulSp = new Sprite;
 	feulSp->Create(L"fuel.png");
-	feulSp->_position = { 100,100 };
+	feulSp->_position = { 100,200 };
 	feulSp->_pivot = { 0,0 };
 	feulSp->isUI = true;
 
@@ -144,6 +144,9 @@ void MainScene::Init()
 	walls[12]->_position = { 8670,8730 };
 	//
 
+
+	TrasgManager::GetInstance()->Make_Trash();
+
 	Bullet_Manager::GetInstance()->Make_Bullet();
 
 	Minimap = new MiniMap(P);
@@ -168,7 +171,7 @@ void MainScene::Update()
 	feulSp->_scale.x = P->feul / 10;
 
 	//적 스포너
-	spawntimer -= Time::deltaTime;
+	/*spawntimer -= Time::deltaTime;
 	if (spawntimer < 0)
 	{
 		vector2 v = { 2450 * float(rand() % 3 + 1),2450 * float(rand() % 3 + 1) };
@@ -185,7 +188,7 @@ void MainScene::Update()
 			break;
 		}
 		spawntimer = 1;
-	}
+	}*/
 	//
 
 	//벽 충돌처리
@@ -200,6 +203,27 @@ void MainScene::Update()
 	}
 	//
 
+	//쓰래기 충돌처리
+	P->isoil = false;
+	for (auto it : TrasgManager::GetInstance()->Trashs)
+	{
+		RECT TEMP;
+		if (IntersectRect(&TEMP, &P->GetRect(), &it->GetRect()))
+		{
+			if (it->t == T_Trash_Type::oil)
+			{
+				P->isoil = true;
+			}
+			else if (it->t == T_Trash_Type::trash)
+			{
+				if (it->_visible)
+				{
+					P->isHit();
+					it->_visible = false;
+				}
+			}
+		}
+	}
 	//플레이어 점프 충돌처리
 	if (P->isJump)
 	{
@@ -223,15 +247,29 @@ void MainScene::Update()
 
 	for (auto it : Bullet_Manager::GetInstance()->_bullets)
 	{
+		for (auto it3 : TrasgManager::GetInstance()->Trashs)
+		{
+			if (it->_mytype == T_My_Type::player && it3->t == T_Trash_Type::trash && it3->_visible && !it->isHit)
+			{
+				RECT TEMP;
+				if (IntersectRect(&TEMP, &it->GetRect(), &it3->GetRect()))
+				{
+					it3->Hp--;
+					if (it3->Hp <= 0)
+					{
+						it3->_visible = false;
+					}
+					it->isHit = true;
+				}
+			}
+		}
+
 		for (auto it2 : EnemyManager::GetInstance()->_enemys)
 		{
 			if (it->_visible && !it->isHit)
 			{
 				it->CollideBullet(P);
-				//for(auto it : Enemy_Manager::GetInstance()->_enemys)
-				//{
-				//		it->collideBullet(it);
-				//}
+				
 				if (it2->_visible && !it2->isDie)
 				{
 					it->CollideBullet(it2);
@@ -253,9 +291,11 @@ void MainScene::Update()
 	{
 		P->isshot = false;
 	}
+
+	
 }
 
 void MainScene::OnExit()
 {
-}
+}                           
 

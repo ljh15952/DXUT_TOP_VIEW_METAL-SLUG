@@ -27,6 +27,7 @@ Player::Player()
 
 	iscol = false;
 	isshot = false;
+	isoil = false;
 
 	feul = 0;
 
@@ -53,7 +54,8 @@ void Player::Movement()
 
 	if (!isJump)
 	{
-		Speed = 10;
+		isoil ? Speed = 5 : Speed = 10;
+
 		if (DXUTIsKeyDown(VK_SPACE))
 			Speed = 0;
 		if (DXUTWasKeyPressed('Z'))
@@ -72,8 +74,6 @@ void Player::Movement()
 			jumpTimer = 0.5f;
 		}
 		Speed = 15;
-
-		cout << "점프중임~" << endl;
 	}
 
 
@@ -108,6 +108,7 @@ void Player::Attack()
 		case P_shot_type::youdo_missle:
 			if (youdo_missile_ammo > 0)
 			{
+
 			}
 			break;
 		}
@@ -179,17 +180,18 @@ void Player::Update()
 		shot_type = P_shot_type::machine_gun;
 	if (DXUTWasKeyPressed('3'))
 		shot_type = P_shot_type::youdo_missle;
-	if (DXUTWasKeyPressed('4'))
-		RideType = Ride_type::kickboard;
-	if (DXUTWasKeyPressed('5'))
-		RideType = Ride_type::motercycle;
-	if (DXUTWasKeyPressed('6'))
-		RideType = Ride_type::horse;
 }
 
 void Player::isHit()
 {
 	cout << "PLAYER HIT!!!!!!!" << endl;
+	Hp--;
+	UI::GetInstance()->SetHpUI(Hp);
+	if (Hp <= 0)
+	{
+		cout << "SET GAME OVER!!!" << endl;
+		//GameManager::GetInstance()->gamestart = false;
+	}
 }
 
 void Player::Shot()

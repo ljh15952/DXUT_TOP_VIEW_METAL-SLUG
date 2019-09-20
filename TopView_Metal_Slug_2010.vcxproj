@@ -397,6 +397,7 @@
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Trash.cpp" />
     <ClCompile Include="Types.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClInclude Include="Bullet.h" />
@@ -412,6 +413,7 @@
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Trash.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="UI.h" />
     <None Include="DXUT\Optional\directx.ico" />

@@ -7,6 +7,7 @@
 #include "MiniMap.h"
 #include "Enemy_1.h"
 #include "UI.h"
+#include"Trash.h"
 class MainScene : public Scene
 {
 public:
@@ -24,5 +25,6 @@ public:
 	float spawntimer;
 
 	vector<Sprite*> walls;
+
 };
 

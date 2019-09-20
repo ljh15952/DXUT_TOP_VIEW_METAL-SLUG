@@ -14,5 +14,11 @@ public:
 	Sprite* blackback;
 	Sprite* name[2];
 	Sprite* script;
+
+	void SetHpUI(int Hp);
+	void SetmissinUI();
+	void SetmissionTextUI();
+	void SetprofileUI();
+	void SetScriptUI();
 };
 

@@ -389,6 +389,14 @@ enum T_Player_AniState
 	horse_walk,
 	kickboard_walk,
 };
+
+
+enum T_Trash_Type
+{
+	oil,
+	trash,
+};
+
 #endif
 
 

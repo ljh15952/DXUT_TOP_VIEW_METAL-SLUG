@@ -49,7 +49,30 @@ void UI::UI_Init()
 	blackback->isUI = true;
 	blackback->_position = { 0,720 };
 
-
-	
-	//script;
+	script = new Sprite;
+	script->Create(L"UI/script.png");
+	script->_position = { 300,600 };
+	script->isUI = true;
 }
+
+void UI::SetHpUI(int hp)
+{
+	Hp[hp]->_visible = false;
+}
+
+void UI::SetmissinUI()
+{
+}
+
+void UI::SetmissionTextUI()
+{
+}
+
+void UI::SetprofileUI()
+{
+}
+
+void UI::SetScriptUI()
+{
+}
+     
