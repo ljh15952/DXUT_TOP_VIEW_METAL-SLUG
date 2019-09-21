@@ -16,7 +16,7 @@ Player::Player()
 	Hp = 3;
 	Speed = 10;
 	isJump = false;
-	jumpTimer = 0.5f;
+	jumpTimer = 1;
 
 	shot_type = P_shot_type::pistol;
 	_mytype = T_My_Type::player;
@@ -31,8 +31,10 @@ Player::Player()
 
 	feul = 0;
 
-	Anistate = T_Player_AniState::pistol_walk;
+	speedLimit = 10;
 
+	Anistate = T_Player_AniState::pistol_walk;
+	cameraaddnum = 0.2f;
 }
 
 void Player::Movement()
@@ -54,10 +56,26 @@ void Player::Movement()
 
 	if (!isJump)
 	{
-		isoil ? Speed = 5 : Speed = 10;
-
 		if (DXUTIsKeyDown(VK_SPACE))
-			Speed = 0;
+		{
+			if(Speed>0)
+				Speed-= cameraaddnum + 0.3f;
+		}
+		else
+		{
+			if (isoil)
+			{
+				if (Speed > 5)
+					Speed -= cameraaddnum;
+				if (Speed < 3)
+					Speed+= cameraaddnum;
+			}
+			else
+			{
+				if (Speed < speedLimit)
+					Speed+= cameraaddnum + 0.3f;
+			}
+		}
 		if (DXUTWasKeyPressed('Z'))
 			isJump = true;
 	}
@@ -71,9 +89,18 @@ void Player::Movement()
 			//타고있으면 적 이동수단 뻇어타고
 			//안타고있으면 플레이어 바로 사망 게임오버
 			isJump = false;
-			jumpTimer = 0.5f;
+			jumpTimer = 1;
 		}
-		Speed = 15;
+		if (jumpTimer < 0.5f)
+		{
+			if (Speed > speedLimit)
+				Speed-= cameraaddnum;
+		}
+		else
+		{
+			if (Speed < speedLimit+5)
+				Speed+= cameraaddnum;
+		}
 	}
 
 
@@ -82,6 +109,8 @@ void Player::Movement()
 	_position += v * Speed;
 
 	ShotPos->_position = _position + v * 35;
+
+	GM::GetInstance()->SetCameraUpdate(Speed);
 }
 
 void Player::Attack()
@@ -117,6 +146,8 @@ void Player::Attack()
 
 void Player::Update()
 {
+	if (!GM::GetInstance()->isgamestart)
+		return;
 	if(RideType != Ride_type::foot)
 		feul -= Time::deltaTime;
 
@@ -129,6 +160,7 @@ void Player::Update()
 
 	if (RideType == Ride_type::foot)
 	{
+		speedLimit = 10;
 		if (isshot)
 		{
 			switch (Anistate)
@@ -159,14 +191,17 @@ void Player::Update()
 	}
 	else if (RideType == Ride_type::kickboard)
 	{
+		speedLimit = 12;
 		Animation(L"k/Kickboard ", 4, 0.05f, 5);
 	}
 	else if (RideType == Ride_type::motercycle)
 	{
+		speedLimit = 14;
 		Animation(L"m/MotorCycle ", 4, 0.07f, 6);
 	}
 	else if (RideType == Ride_type::horse)
 	{
+		speedLimit = 13;
 		Animation(L"h/Horse ", 5, 0.07f, 7);
 	}
 
@@ -184,13 +219,11 @@ void Player::Update()
 
 void Player::isHit()
 {
-	cout << "PLAYER HIT!!!!!!!" << endl;
 	Hp--;
 	UI::GetInstance()->SetHpUI(Hp);
 	if (Hp <= 0)
 	{
-		cout << "SET GAME OVER!!!" << endl;
-		//GameManager::GetInstance()->gamestart = false;
+		GM::GetInstance()->isgamestart = false;
 	}
 }
 

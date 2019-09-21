@@ -1,7 +1,6 @@
 #include "DXUT.h"
 #include "Enemy_1.h"
-
-//enemy manager ȭ
+#include "GM.h"
 
 Enemy_1::Enemy_1()
 {
@@ -73,7 +72,7 @@ void Enemy_1::Movement()
 
 void Enemy_1::Update()
 {
-	if (!_visible)
+	if (!_visible || !GM::GetInstance()->isgamestart)
 		return;
 	
 	if (isDie)
@@ -100,6 +99,8 @@ void Enemy_1::isHit()
 	{
 		isDie = true;
 		mini->_visible = false;
+		GM::GetInstance()->KillPoint++;
+		GM::GetInstance()->SetNextMission();
 	}
 }
 

@@ -8,6 +8,7 @@
 #include "Enemy_1.h"
 #include "UI.h"
 #include"Trash.h"
+#include "GM.h"
 class MainScene : public Scene
 {
 public:

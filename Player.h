@@ -32,5 +32,9 @@ public:
 	bool isoil;
 
 	float feul;
+
+	int speedLimit;
+
+	float cameraaddnum;
 };
 

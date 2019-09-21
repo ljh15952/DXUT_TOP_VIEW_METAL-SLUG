@@ -1,6 +1,6 @@
 #include "DXUT.h"
 #include "UI.h"
-
+#include "GM.h"
 void UI::UI_Init()
 {
 	for (int i = 0; i < 3; i++)
@@ -16,6 +16,13 @@ void UI::UI_Init()
 		Hp[i]->_position = { 150 + float(i * 70),30 };
 	}
 
+
+	blackback = new Sprite;
+	blackback->Create(L"UI/Sub_bg.png");
+	blackback->_pivot = { 0,1 };
+	blackback->isUI = true;
+	blackback->_position = { 0,720 };
+
 	for (int i = 0; i < 2; i++)
 	{
 		profile[i] = new Sprite;
@@ -27,7 +34,13 @@ void UI::UI_Init()
 		name[i]->Create(L"UI/N" + to_wstring(i) + L".png");
 		name[i]->isUI = true;
 		name[i]->_position = { 100,535 };
+
+		script[i] = new Sprite;
+		script[i]->Create(L"UI/script" + to_wstring(i) + L".png");
+		script[i]->_position = { 300,600 };
+		script[i]->isUI = true;
 	}
+	script[1]->_visible = false;
 	name[1]->_visible = false;
 
 	profile[0]->_position = { 60,60 };
@@ -43,16 +56,13 @@ void UI::UI_Init()
 	missionText->isUI = true;
 	missionText->_position = { 640,80 };
 
-	blackback = new Sprite;
-	blackback->Create(L"UI/Sub_bg.png");
-	blackback->_pivot = { 0,1 };
-	blackback->isUI = true;
-	blackback->_position = { 0,720 };
+	
 
-	script = new Sprite;
-	script->Create(L"UI/script.png");
-	script->_position = { 300,600 };
-	script->isUI = true;
+	
+
+	isScript = true;
+	scriptnum = 0;
+	clicknum = 0;
 }
 
 void UI::SetHpUI(int hp)
@@ -72,7 +82,38 @@ void UI::SetprofileUI()
 {
 }
 
-void UI::SetScriptUI()
+void UI::SetNextScriptUI()
 {
+	clicknum++;
+	if (clicknum == 2)
+	{
+		GM::GetInstance()->isgamestart = true;
+		isScript = false;
+		
+		for (int i = 0; i < 2; i++)
+		{
+			script[i]->_visible = false;
+			name[i]->_visible = false;
+		}
+		blackback->_visible = false;
+		return;
+	}
+
+	script[scriptnum]->_visible = false;
+	scriptnum++;
+	script[scriptnum]->_visible = true;
+
+	if (scriptnum % 2 == 0)
+	{
+		name[0]->_visible = true;
+		name[1]->_visible = false;
+		cout << "ASDASD ?";
+	}
+	else
+	{
+		name[0]->_visible = false;
+		name[1]->_visible = true;
+	}
+	
 }
      

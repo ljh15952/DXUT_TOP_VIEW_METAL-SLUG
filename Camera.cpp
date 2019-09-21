@@ -1,6 +1,6 @@
 #include "DXUT.h"
 #include "Camera.h"
-
+#include "GM.h"
 
 void Camera::CameraInit()
 {
@@ -44,7 +44,7 @@ void Camera::SetTransform()
 
 //	static int a = 1280;
 	//static int b = 720;
-	//D3DXMatrixOrthoLH(&orthographicMatrix, a, -b, 0.0f, 1.0f);
+	D3DXMatrixOrthoLH(&orthographicMatrix, GM::GetInstance()->CameraSize.x, GM::GetInstance()->CameraSize.y, 0.0f, 1.0f);
 //	a+= 1;
 //	b += 1;
 	DXUTGetD3D9Device()->SetTransform(D3DTS_PROJECTION, &orthographicMatrix);

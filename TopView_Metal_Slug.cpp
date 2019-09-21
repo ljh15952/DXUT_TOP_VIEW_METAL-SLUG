@@ -87,7 +87,7 @@ int main()
 	DXUTSetHotkeyHandling(true, true, true);  // handle the default hotkeys
 	DXUTSetCursorSettings(true, true); // Show the cursor and clip it when in full screen
 	DXUTCreateWindow(L"Seoul_Homework");
-	DXUTCreateDevice(true, 1280, 720);
+	DXUTCreateDevice(false, 1280, 720);
 
 	Director::GetInstance()->ChangeScene(new MainScene);
 

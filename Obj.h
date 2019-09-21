@@ -1,5 +1,6 @@
 #pragma once
 #include "Sprite.h"
+#include "GM.h"
 class Obj : public Sprite
 {
 public:

@@ -75,21 +75,25 @@
 //적죽으면 맵에서 사라지게 OK
 //적여러종류추가
 
-//쓰래기설치 지뢰 던지기 **
-//점프해서봐꾸기시스템 **
 //아이템 쓰래기 뿌시면나오는거 **
-//쓰래기나 지뢰 충돌처리 주인공이랑 **
-//엄청난 UI들
+//유도탄,스패셜스킬
+//맞으면 깜빡이는거
 
 //게임목표 1스테이지 클리어 조건
 //게임어떠케시작할지 게임어떠떠케끝날지 처음에 2명을 쫓아가면서 스토리뜨면시작
 //화면가운데위에 미션이뜸 
 //마지막에 하천쪽으로이동하면서 끝    
 
+
 //미니맵 주인공 파란색 화살표로 적들은 어케할까 
 //지뢰크기 up 깜빡이는 애니메이션
 //미션 1스프라이트에서 1때서주기
-
+//아래미션들과 여러가지스크립트
+//게섯거라~ 나잡아봐라
+//이번엔 말이냐  
+//이번엔 오토바이냐
+//다 죽여주지
+//다죽였군 이젠 바다로 가볼까
 
 //미션1 야쿠자들을 죽여라! 남은적 : 2
 //미션2 말을 탄 야쿠자들을 빨리 죽여라! 남은적 : 3
@@ -98,13 +102,13 @@
 void MainScene::Init()
 {
 	P = new Player;
-	P->_position = { 2300,2300 };
+	P->_position = { 1600,2300 };
 	this->AddChild(P, 1);
 
 	S2 = new Sprite;
 	S2->Create(L"asd.png");
 	S2->_pivot = { 0,0 };
-//	S2->_scale = { 0.2f,0.2f };
+	//	S2->_scale = { 0.2f,0.2f };
 	this->AddChild(S2, 0);
 
 
@@ -118,7 +122,7 @@ void MainScene::Init()
 	EnemyManager::GetInstance()->Make_Enemy();
 	for (int i = 0; i < 2; i++)
 	{
-		EnemyManager::GetInstance()->SetEnemy({ 4930,4880 }, Ride_type::foot);
+		EnemyManager::GetInstance()->SetEnemy({ 2000,2200 + float(200 * i) }, Ride_type::foot);
 	}
 
 	//set wall            
@@ -150,12 +154,13 @@ void MainScene::Init()
 	Bullet_Manager::GetInstance()->Make_Bullet();
 
 	Minimap = new MiniMap(P);
-    
+
 	Camera::GetInstance()->CameraInit();
 	Camera::GetInstance()->Follow(P);
 
 
 	UI::GetInstance()->UI_Init();
+	GM::GetInstance()->GMInit();
 
 	spawntimer = 1;
 }
@@ -237,7 +242,7 @@ void MainScene::Update()
 					//it->_visible = false;
 					P->RideType = it->RideType;
 
-					if(P->RideType != Ride_type::foot)
+					if (P->RideType != Ride_type::foot)
 						P->feul = 10;
 				}
 			}
@@ -247,6 +252,18 @@ void MainScene::Update()
 
 	for (auto it : Bullet_Manager::GetInstance()->_bullets)
 	{
+		for (auto it2 : EnemyManager::GetInstance()->_enemys)
+		{
+			if (it->_visible && !it->isHit)
+			{
+				it->CollideBullet(P);
+
+				if (it2->_visible && !it2->isDie)
+				{
+					it->CollideBullet(it2);
+				}
+			}
+		}
 		for (auto it3 : TrasgManager::GetInstance()->Trashs)
 		{
 			if (it->_mytype == T_My_Type::player && it3->t == T_Trash_Type::trash && it3->_visible && !it->isHit)
@@ -264,24 +281,17 @@ void MainScene::Update()
 			}
 		}
 
-		for (auto it2 : EnemyManager::GetInstance()->_enemys)
-		{
-			if (it->_visible && !it->isHit)
-			{
-				it->CollideBullet(P);
-				
-				if (it2->_visible && !it2->isDie)
-				{
-					it->CollideBullet(it2);
-				}
-			}
-		}
 	}
 
 	if (Director::GetInstance()->OnMouseDown())
 	{
 		P->isshot = true;
 		P->shot_timer = 0;
+
+		if (UI::GetInstance()->isScript)
+		{
+			UI::GetInstance()->SetNextScriptUI();
+		}
 	}
 	else if (Director::GetInstance()->OnMouse())
 	{
@@ -292,10 +302,10 @@ void MainScene::Update()
 		P->isshot = false;
 	}
 
-	
+
 }
 
 void MainScene::OnExit()
 {
-}                           
+}
 

@@ -3,7 +3,14 @@
 class GM : public Singleton<GM>
 {
 public:
-	void SpawnEnemy(int howmany);
-	void SetCamera();
+	void GMInit();
+	void SpawnEnemy(int missionnum);
+	void SetCameraUpdate(float Speed);
+	void SetNextMission();
+
+	bool isgamestart;
+	vector2 CameraSize;
+	int KillPoint;
+
 };
 
