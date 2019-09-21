@@ -6,6 +6,7 @@ Bullet::Bullet()
 	Create(L"N_A.png");
 	_visible = false;
 	isHit = false;
+	timer = 3;
 }
 
 void Bullet::Update()
@@ -27,6 +28,17 @@ void Bullet::Update()
 
 	if (_mytype == T_My_Type::player && !isHit)
 		_position += _v * 30;
+
+	if (_mytype == T_My_Type::enemy && !isHit)
+	{
+		timer -= Time::deltaTime;
+		if (timer < 0)
+		{
+			isHit = true;
+			timer = 3;
+		}
+	}
+
 }
 
 void Bullet::CollideBullet(Obj* obj)

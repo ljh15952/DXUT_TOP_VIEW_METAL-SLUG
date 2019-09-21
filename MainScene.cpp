@@ -78,6 +78,8 @@
 //아이템 쓰래기 뿌시면나오는거 **
 //유도탄,스패셜스킬
 //맞으면 깜빡이는거
+//맞으면 화면흔들리는거
+//죽는 애니메이션 + 폭팔 이펙트
 
 //게임목표 1스테이지 클리어 조건
 //게임어떠케시작할지 게임어떠떠케끝날지 처음에 2명을 쫓아가면서 스토리뜨면시작
@@ -271,11 +273,7 @@ void MainScene::Update()
 				RECT TEMP;
 				if (IntersectRect(&TEMP, &it->GetRect(), &it3->GetRect()))
 				{
-					it3->Hp--;
-					if (it3->Hp <= 0)
-					{
-						it3->_visible = false;
-					}
+					it3->_visible = false;
 					it->isHit = true;
 				}
 			}

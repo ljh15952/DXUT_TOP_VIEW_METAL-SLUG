@@ -13,7 +13,7 @@ public:
 	void SetBullet();
 	bool isHit;
 	wstring DieAnipath;
-
+	float timer;
 };
 
 class Bullet_Manager : public Singleton<Bullet_Manager>

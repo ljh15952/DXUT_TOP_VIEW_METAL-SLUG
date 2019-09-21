@@ -275,7 +275,7 @@
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>d3dx10.lib;d3dx9.lib;dxerr.lib;dxguid.lib;winmm.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LargeAddressAware>true</LargeAddressAware>
@@ -361,7 +361,7 @@
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>d3dx10.lib;d3dx9.lib;dxerr.lib;dxguid.lib;winmm.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LargeAddressAware>true</LargeAddressAware>

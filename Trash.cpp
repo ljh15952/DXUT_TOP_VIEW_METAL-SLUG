@@ -12,8 +12,6 @@ Trash::Trash(T_Trash_Type T)
 		Create(L"Trash_Dumy.png");
 	}
 	t = T;
-
-	Hp = 3;
 }
 
 void TrasgManager::Make_Trash()

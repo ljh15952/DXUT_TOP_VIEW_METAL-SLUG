@@ -36,5 +36,13 @@ public:
 	int speedLimit;
 
 	float cameraaddnum;
+
+	float hittimer;
+	bool ishit;
+	bool vis;
+	int bisnum;
+
+	bool isdie;
+	Sprite* dieeft;
 };
 

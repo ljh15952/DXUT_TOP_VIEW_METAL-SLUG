@@ -12,7 +12,6 @@ class Trash : public Sprite
 public:
 	Trash(T_Trash_Type T);
 	T_Trash_Type t;
-	int Hp;
 };
 
 class TrasgManager : public Singleton<TrasgManager>

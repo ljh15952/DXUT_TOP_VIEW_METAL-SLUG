@@ -11,6 +11,12 @@ Player::Player()
 	ShotPos->_scale = { 0.1f,0.1f };
 	ShotPos->_position = { 100,100 };
 
+	dieeft = new Sprite;
+	dieeft->_position = { 640,360 };
+	dieeft->isUI = true;
+	dieeft->_layer = 1;
+	dieeft->_scale = { 1.5,1.5f };
+
 
 	RideType = Ride_type::foot;
 	Hp = 3;
@@ -35,6 +41,12 @@ Player::Player()
 
 	Anistate = T_Player_AniState::pistol_walk;
 	cameraaddnum = 0.2f;
+	hittimer = 0.1f;
+
+	ishit = false;
+	vis = false;
+	isdie = false;
+	bisnum = 0;
 }
 
 void Player::Movement()
@@ -74,6 +86,8 @@ void Player::Movement()
 			{
 				if (Speed < speedLimit)
 					Speed+= cameraaddnum + 0.3f;
+				if(Speed>speedLimit)
+					Speed -= cameraaddnum + 0.3f;
 			}
 		}
 		if (DXUTWasKeyPressed('Z'))
@@ -146,10 +160,42 @@ void Player::Attack()
 
 void Player::Update()
 {
+	if (isdie)
+	{
+		dieeft->Animation(L"explose/Explosion ", 4, 0.15f, 18);
+		if (Animation(L"a/die/Die ", 3, 0.2f, 17))
+		{
+			dieeft->_visible = false;
+			_visible = false;
+			isdie = false;
+		}
+		return;
+	}
+
 	if (!GM::GetInstance()->isgamestart)
 		return;
 	if(RideType != Ride_type::foot)
 		feul -= Time::deltaTime;
+
+	
+
+	if (ishit)
+	{
+		hittimer -= Time::deltaTime;
+
+		if (hittimer < 0)
+		{
+			_visible = vis;
+			vis = !vis;
+			bisnum++;
+			hittimer = 0.1f;
+			if (bisnum > 9)
+			{
+				bisnum = 0;
+				ishit = false;
+			}
+		}
+	}
 
 	if (feul < 0)
 	{
@@ -219,10 +265,15 @@ void Player::Update()
 
 void Player::isHit()
 {
+	if (ishit)
+		return;
+
+	ishit = true;
 	Hp--;
 	UI::GetInstance()->SetHpUI(Hp);
 	if (Hp <= 0)
 	{
+		isdie = true;
 		GM::GetInstance()->isgamestart = false;
 	}
 }
