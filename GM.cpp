@@ -11,7 +11,30 @@ void GM::GMInit()
 	isshake = false;
 
 	timer = new Label;
+	timer->_position = { 640,100 };
 	time = 60;
+
+	EnemyRemainLabel = new Label;
+	EnemyRemainLabel->_position = { 640,200 };
+	howmanyenemy = 2;
+	countEnemy();
+
+
+	remainpistol = new Label;
+	remainmachine = new Label;
+	remainyoudo = new Label;
+
+	remainpistol->_scale = { 0.7f,0.7f };
+	remainpistol->_position = { 138,30 };
+	remainpistol->Create_Label(10);
+
+	remainmachine->_scale = { 0.7f,0.7f };
+	remainmachine->_position = { 200,30 };
+	remainmachine->Create_Label(0);
+
+	remainyoudo->_scale = { 0.7f,0.7f };
+	remainyoudo->_position = { 280,30 };
+	remainyoudo->Create_Label(0);
 }
 
 void GM::SpawnEnemy(int missionnum)
@@ -24,6 +47,7 @@ void GM::SpawnEnemy(int missionnum)
 		{
 			vector2 v = { 2450 * float(rand() % 3 + 1),2450 * float(rand() % 3 + 1) };
 			EnemyManager::GetInstance()->SetEnemy(v, Ride_type::horse);
+			howmanyenemy++;
 		}
 		break;
 	case 3:
@@ -31,6 +55,8 @@ void GM::SpawnEnemy(int missionnum)
 		{
 			vector2 v = { 2450 * float(rand() % 3 + 1),2450 * float(rand() % 3 + 1) };
 			EnemyManager::GetInstance()->SetEnemy(v, Ride_type::motercycle);
+			howmanyenemy++;
+
 		}
 		break;
 	case 4:
@@ -38,16 +64,22 @@ void GM::SpawnEnemy(int missionnum)
 		{
 			vector2 v = { 2450 * float(rand() % 3 + 1),2450 * float(rand() % 3 + 1) };
 			EnemyManager::GetInstance()->SetEnemy(v, Ride_type::horse);
+			howmanyenemy++;
+
 		}
 		for (int i = 0; i < 4; i++)
 		{
 			vector2 v = { 2450 * float(rand() % 3 + 1),2450 * float(rand() % 3 + 1) };
 			EnemyManager::GetInstance()->SetEnemy(v, Ride_type::motercycle);
+			howmanyenemy++;
+
 		}
 		for (int i = 0; i < 4; i++)
 		{
 			vector2 v = { 2450 * float(rand() % 3 + 1),2450 * float(rand() % 3 + 1) };
 			EnemyManager::GetInstance()->SetEnemy(v, Ride_type::foot);
+			howmanyenemy++;
+
 		}
 		break;
 	case 5:
@@ -55,6 +87,7 @@ void GM::SpawnEnemy(int missionnum)
 		isgamestart = false;
 		break;
 	}
+	countEnemy();
 }
 
 void GM::SetCameraUpdate(float Speed)
@@ -107,5 +140,26 @@ void GM::UpdateTimer()
 	time -= Time::deltaTime;
 	if (time <= 0)
 		isgamestart = false;
-	timer->Create_Label(time, { 640,100 });
+	timer->Create_Label(time);
+}
+
+void GM::countEnemy()
+{
+	EnemyRemainLabel->Create_Label(howmanyenemy);
+}
+
+void GM::minusenemycount()
+{
+	howmanyenemy--;
+	countEnemy();
+}
+
+void GM::SetMachineGunLabel(int a)
+{
+	remainmachine->Create_Label(a);
+}
+
+void GM::SetYoudoGunLabel(int a)
+{
+    remainyoudo->Create_Label(a);
 }

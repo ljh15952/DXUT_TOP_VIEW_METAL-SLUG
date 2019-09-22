@@ -10,6 +10,12 @@ public:
 	void SetNextMission();
 
 	void UpdateTimer();
+	void countEnemy();
+	void minusenemycount();
+
+	void SetMachineGunLabel(int a);
+	void SetYoudoGunLabel(int a);
+
 
 	bool isgamestart;
 	vector2 CameraSize;
@@ -17,6 +23,13 @@ public:
 
 	Label* timer;
 	float time;
+
+	Label* EnemyRemainLabel;
+	int howmanyenemy;
+
+	Label* remainpistol;
+	Label* remainmachine;
+	Label* remainyoudo;
 
 	bool isshake;
 

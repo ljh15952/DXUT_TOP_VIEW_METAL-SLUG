@@ -101,6 +101,7 @@ void Enemy_1::isHit()
 		mini->_visible = false;
 		GM::GetInstance()->KillPoint++;
 		GM::GetInstance()->SetNextMission();
+		GM::GetInstance()->minusenemycount();
 	}
 }
 

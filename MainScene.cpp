@@ -43,18 +43,37 @@
 
 
 //내일할꺼
-//스쿠터설치 with 타는거까지 그냥 부딪혀도 타지게
-//UI작업더해 스크립트나 남은총알수 남은적
 //스패셜스킬
 //2스테이지 작업으로 넘어가기
 //onexit 데이터 소멸..
 
 void MainScene::Init()
 {
+	for (int i = 0; i < 10;i++)
+	{
+		Sprite* k = new Sprite;
+		k->Create(L"k/Kickboard 1.png");
+		k->_position = { 1600 + float(100 * i),2300 };
+		k->_layer = 1;
+		k->_scale = { 1.7f,1.7f };
+		kick.push_back(k);
+	}
+	kick[0]->_position = { 1750,2500 };
+	kick[1]->_position = { 4250,1750 };
+	kick[2]->_position = { 6558.84,2444.84 };
+	kick[3]->_position = { 7472.63,4033.44 };
+	kick[4]->_position = { 6779.15,5660.47 };
+	kick[5]->_position = { 6788.54,6679.89 };
+	kick[6]->_position = { 7971.3,7615.05 };
+	kick[7]->_position = { 5411.36,7601.43 };
+	kick[8]->_position = { 4805.59,8605.6 };
+	kick[9]->_position = { 1010.59,7569.32 };
+
+
 	P = new Player;
 	P->_position = { 1600,2300 };
 	this->AddChild(P, 1);
-
+	      
 	S2 = new Sprite;
 	S2->Create(L"asd.png");
 	S2->_pivot = { 0,0 };
@@ -63,7 +82,7 @@ void MainScene::Init()
 
 	feulSp = new Sprite;
 	feulSp->Create(L"fuel.png");
-	feulSp->_position = { 100,200 };
+	feulSp->_position = { 590,400 };
 	feulSp->_pivot = { 0,0 };
 	feulSp->isUI = true;
 
@@ -123,6 +142,7 @@ void MainScene::Update()
 	//
 	GM::GetInstance()->UpdateTimer();
 
+
 	feulSp->_scale.x = P->feul / 10;
 
 	//적 스포너
@@ -144,6 +164,20 @@ void MainScene::Update()
 		}
 		spawntimer = 1;
 	}*/
+	//
+
+	//스쿠터타기
+	for (auto it : kick)
+	{
+		RECT TEMP;
+		if (IntersectRect(&TEMP, &P->GetRect(), &it->GetRect()))
+		{
+			it->_position = {-5000,-5000};
+			P->RideType = Ride_type::kickboard;
+			if (P->RideType != Ride_type::foot)
+				P->feul = 10;
+		}
+	}
 	//
 
 	//벽 충돌처리

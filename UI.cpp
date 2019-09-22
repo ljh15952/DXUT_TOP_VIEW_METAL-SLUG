@@ -13,7 +13,8 @@ void UI::UI_Init()
 		Hp[i] = new Sprite;
 		Hp[i]->Create(L"UI/Heart.png");
 		Hp[i]->isUI = true;
-		Hp[i]->_position = { 150 + float(i * 70),30 };
+		Hp[i]->_scale = { 0.6f,0.6f };
+		Hp[i]->_position = { 25 + float(i * 35),130 };
 	}
 
 

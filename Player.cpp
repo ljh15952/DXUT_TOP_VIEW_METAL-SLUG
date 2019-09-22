@@ -145,6 +145,7 @@ void Player::Attack()
 			{
 				Bullet_Manager::GetInstance()->Shot_Bullet(ShotPos->_position, { v.x,v.y }, _mytype, shot_type);
 				machine_gun_ammo--;
+				GM::GetInstance()->SetMachineGunLabel(machine_gun_ammo);
 				shot_timer = 0.05f;
 			}
 			break;
@@ -153,6 +154,7 @@ void Player::Attack()
 			{
 				Bullet_Manager::GetInstance()->Shot_Bullet(ShotPos->_position, { v.x,v.y }, _mytype, shot_type);
 				youdo_missile_ammo--;
+				GM::GetInstance()->SetYoudoGunLabel(youdo_missile_ammo);
 				shot_timer = 0.5f;
 			}
 			break;
@@ -251,7 +253,11 @@ void Player::Update()
 		speedLimit = 13;
 		Animation(L"h/Horse ", 5, 0.07f, 7);
 	}
-
+	else if (RideType == Ride_type::kickboard)
+	{
+		speedLimit = 13;
+		Animation(L"k/Kickboard ", 4, 0.07f, 17);
+	}
 
 	if (DXUTWasKeyPressed('1'))
 	{

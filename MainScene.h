@@ -25,6 +25,8 @@ public:
 
 	float spawntimer;
 
+	vector<Sprite*> kick;
+
 	vector<Sprite*> walls;
 
 };

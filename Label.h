@@ -7,7 +7,7 @@ class Label :
 {
 public:
 	vector<Sprite*> sp;
-	void Create_Label(int num, vector2 vec);
+	void Create_Label(int num);
 	void Delete_Label();
 	int Addpos;
 };
