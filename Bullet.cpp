@@ -1,12 +1,13 @@
 #include "DXUT.h"
 #include "Bullet.h"
-
+#include "Enemy_1.h"
 Bullet::Bullet()
 {
 	Create(L"N_A.png");
 	_visible = false;
 	isHit = false;
-	timer = 3;
+	timer = 10;
+	youdosp = nullptr;
 }
 
 void Bullet::Update()
@@ -22,23 +23,55 @@ void Bullet::Update()
 		{
 			isHit = false;
 			_visible = false;
+			youdosp = nullptr;
 		}
+		return;
 	}
 
 
-	if (_mytype == T_My_Type::player && !isHit)
+	if (_mytype == T_My_Type::player && !isHit &&_my_shot_type !=P_shot_type::youdo_missle)
 		_position += _v * 30;
-
+	else if(_my_shot_type == P_shot_type::youdo_missle && !isHit)
+	{
+		shot_youdo();
+	}
 	if (_mytype == T_My_Type::enemy && !isHit)
 	{
 		timer -= Time::deltaTime;
 		if (timer < 0)
 		{
 			isHit = true;
-			timer = 3;
+			timer = 10;
 		}
 	}
 
+}
+void Bullet::shot_youdo()
+{
+	for (auto it : EnemyManager::GetInstance()->_enemys)
+	{
+		if (it->_visible && !youdosp && !it->isDie)
+		{
+			vector2 v = { it->_position.x - _position.x,it->_position.y - _position.y };
+			float l = sqrt(v.x * v.x + v.y * v.y);
+			if (l < 800)
+			{
+				youdosp = it;
+			}
+		}
+	}
+	if (youdosp)
+	{
+		if (GoTo(youdosp->_position, 1000))
+		{
+			isHit = true;
+			cout << "HI?" << endl;
+		}
+	}
+	else
+	{
+		isHit = true;
+	}
 }
 
 void Bullet::CollideBullet(Obj* obj)
@@ -60,12 +93,19 @@ void Bullet::SetBullet()
 		Create(L"E/w/Mine.png");
 		DieAnipath = L"explose/Explosion ";
 	}
+	else if (_my_shot_type == P_shot_type::youdo_missle)
+	{
+		Create(L"S_A.png");
+		DieAnipath = L"explose/Explosion ";
+	}
 	else
 	{
 		Create(L"N_A.png");
 		DieAnipath = L"explose/Explosion ";
 	}
 }
+
+
 
 
 void Bullet_Manager::Make_Bullet()
@@ -77,7 +117,7 @@ void Bullet_Manager::Make_Bullet()
 	}
 }
 
-void Bullet_Manager::Shot_Bullet(vector2 startpos, vector2 v, T_My_Type mt)
+void Bullet_Manager::Shot_Bullet(vector2 startpos, vector2 v, T_My_Type mt,P_shot_type shottype)
 {
 	for (auto it : _bullets)
 	{
@@ -89,6 +129,7 @@ void Bullet_Manager::Shot_Bullet(vector2 startpos, vector2 v, T_My_Type mt)
 			it->_mytype = mt;
 			it->_scale = { 1,1 };
 			it->_visible = true;
+			it->_my_shot_type = shottype;
 			it->SetBullet();
 			return;
 		}

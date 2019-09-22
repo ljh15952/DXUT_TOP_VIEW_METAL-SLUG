@@ -21,6 +21,8 @@ MiniMap::MiniMap(Player * p)
 
 void MiniMap::Update()
 {
+	if (!GM::GetInstance()->isgamestart)
+		return;
 	if (P->v.x >= -1 && !P->iscol)
 	{
 		player->_rotation = P->_rotation;

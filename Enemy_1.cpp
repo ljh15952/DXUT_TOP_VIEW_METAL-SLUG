@@ -28,7 +28,7 @@ void Enemy_1::Attack()
 	atktimer -= Time::deltaTime;
 	if (atktimer < 0)
 	{
-		Bullet_Manager::GetInstance()->Shot_Bullet(_position, v, _mytype);
+		Bullet_Manager::GetInstance()->Shot_Bullet(_position, v, _mytype,P_shot_type::pistol);
 		atktimer = 3.5f;
 	}
 	//지뢰나 쓰래기 던지기

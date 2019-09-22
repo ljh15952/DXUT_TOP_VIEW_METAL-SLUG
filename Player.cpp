@@ -28,7 +28,7 @@ Player::Player()
 	_mytype = T_My_Type::player;
 
 	machine_gun_ammo = 500; //
-	youdo_missile_ammo = 0;
+	youdo_missile_ammo = 100;
 	shot_timer = 0.3f;
 
 	iscol = false;
@@ -135,7 +135,7 @@ void Player::Attack()
 		switch (shot_type)
 		{
 		case P_shot_type::pistol:
-			Bullet_Manager::GetInstance()->Shot_Bullet(ShotPos->_position, v,_mytype);
+			Bullet_Manager::GetInstance()->Shot_Bullet(ShotPos->_position, v,_mytype, shot_type);
 			shot_timer = 0.3f;
 			Anistate = T_Player_AniState::pistol_shot;
 			break;
@@ -143,7 +143,7 @@ void Player::Attack()
 			Anistate = T_Player_AniState::machinegun_shot;
 			if (machine_gun_ammo > 0)
 			{
-				Bullet_Manager::GetInstance()->Shot_Bullet(ShotPos->_position, { v.x,v.y }, _mytype);
+				Bullet_Manager::GetInstance()->Shot_Bullet(ShotPos->_position, { v.x,v.y }, _mytype, shot_type);
 				machine_gun_ammo--;
 				shot_timer = 0.05f;
 			}
@@ -151,7 +151,9 @@ void Player::Attack()
 		case P_shot_type::youdo_missle:
 			if (youdo_missile_ammo > 0)
 			{
-
+				Bullet_Manager::GetInstance()->Shot_Bullet(ShotPos->_position, { v.x,v.y }, _mytype, shot_type);
+				youdo_missile_ammo--;
+				shot_timer = 0.5f;
 			}
 			break;
 		}
@@ -178,11 +180,10 @@ void Player::Update()
 		feul -= Time::deltaTime;
 
 	
-
 	if (ishit)
 	{
+		GM::GetInstance()->isshake = !GM::GetInstance()->isshake;
 		hittimer -= Time::deltaTime;
-
 		if (hittimer < 0)
 		{
 			_visible = vis;

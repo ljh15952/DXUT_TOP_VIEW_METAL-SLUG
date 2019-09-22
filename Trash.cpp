@@ -10,6 +10,7 @@ Trash::Trash(T_Trash_Type T)
 	else if (T == T_Trash_Type::trash)
 	{
 		Create(L"Trash_Dumy.png");
+		_layer = 1;
 	}
 	t = T;
 }

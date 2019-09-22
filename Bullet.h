@@ -14,13 +14,17 @@ public:
 	bool isHit;
 	wstring DieAnipath;
 	float timer;
+	P_shot_type _my_shot_type;
+
+	void shot_youdo();
+	Sprite * youdosp;
 };
 
 class Bullet_Manager : public Singleton<Bullet_Manager>
 {
 public:
 	void Make_Bullet();
-	void Shot_Bullet(vector2 startpos, vector2 v, T_My_Type mt);
+	void Shot_Bullet(vector2 startpos, vector2 v, T_My_Type mt, P_shot_type shottype);
 	void Delete_Bullet();
 	list<Bullet*> _bullets;
 };
