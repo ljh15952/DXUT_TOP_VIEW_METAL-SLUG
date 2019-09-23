@@ -5,7 +5,6 @@ void GM::GMInit()
 {
 	isgamestart = false;
 	CameraSize = { 1280 * 10 / 6.5f, -720 * 10 / 6.5f };
-	//CameraSize = { 1280 *1.3f , -720*1.3f };
 	KillPoint = 0;
 
 	isshake = false;

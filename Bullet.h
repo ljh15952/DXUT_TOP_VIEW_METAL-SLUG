@@ -6,9 +6,9 @@ class Bullet :
 {
 public:
 	Bullet();
+	~Bullet();
 	void Update() override;
 	vector2 _v;
-	void CollideBullet(Obj* obj);
 	T_My_Type _mytype;
 	void SetBullet();
 	bool isHit;
@@ -16,8 +16,17 @@ public:
 	float timer;
 	P_shot_type _my_shot_type;
 
-	void shot_youdo();
 	Sprite * youdosp;
+
+	void CollideBullet(Obj* obj);
+	void shot_youdo();
+	bool isScreenOut();
+	void StartBombAni();
+	void P_Movement();
+	void E_Movement();
+	void CommonBulletMove();
+	void YoudoBulletMove();
+	float GetDistance(Sprite * Target);
 };
 
 class Bullet_Manager : public Singleton<Bullet_Manager>

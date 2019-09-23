@@ -24,16 +24,9 @@
 //쓰래기 부시면 아이템뜨고 먹기
 //1스테이지 코드 정리
 //레이어 정리좀
-void MainScene::Init()
-{
-	stage = new Stage_1;
-}
 
-void MainScene::Update()
-{
-	stage->Collide();
-
-	//적 스포너
+//spawntimer = 1;
+//적 스포너
 	/*spawntimer -= Time::deltaTime;
 	if (spawntimer < 0)
 	{
@@ -53,6 +46,17 @@ void MainScene::Update()
 		spawntimer = 1;
 	}*/
 	//
+
+void MainScene::Init()
+{
+	stage = new Stage_1;
+}
+
+void MainScene::Update()
+{
+	stage->Collide();
+
+	
 	if (DXUTWasKeyPressed('Q'))
 	{
 		delete stage;
@@ -63,7 +67,6 @@ void MainScene::Update()
 		delete stage;
 		stage = new Stage_3;
 	}
-	
 }
 
 void MainScene::OnExit()

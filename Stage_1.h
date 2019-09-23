@@ -23,7 +23,6 @@ private:
 
 	Sprite* feulSp;
 
-	float spawntimer;
 
 	vector<Sprite*> kick;
 

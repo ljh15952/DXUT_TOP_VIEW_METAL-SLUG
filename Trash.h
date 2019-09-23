@@ -12,6 +12,7 @@ class Trash : public Sprite
 public:
 	Trash(T_Trash_Type T);
 	T_Trash_Type t;
+
 };
 
 class TrasgManager : public Singleton<TrasgManager>
@@ -20,6 +21,8 @@ public:
 	void Make_Trash();
 	void Delete_Trash();
 	vector<Trash*> Trashs;
+
+	void Set_Trash_Pos();
 };
 
 

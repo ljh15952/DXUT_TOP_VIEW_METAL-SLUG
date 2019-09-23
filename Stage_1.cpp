@@ -84,7 +84,6 @@ Stage_1::Stage_1()
 	UI::GetInstance()->UI_Init();
 	GM::GetInstance()->GMInit();
 
-	spawntimer = 1;
 
 	AddRenderTarget();
 }
@@ -122,7 +121,7 @@ void Stage_1::Collide()
 		if (IntersectRect(&TEMP, &P->GetRect(), &it->GetRect()))
 		{
 			it->_position = { -5000,-5000 };
-			P->RideType = Ride_type::kickboard;
+			P->Set_P_KickBoard_State();
 			if (P->RideType != Ride_type::foot)
 				P->feul = 10;
 		}
@@ -172,11 +171,16 @@ void Stage_1::Collide()
 				RECT TEMP;
 				if (IntersectRect(&TEMP, &P->GetRect(), &it->GetRect()))
 				{
-					//it->_visible = false;
-					P->RideType = it->RideType;
-
-					if (P->RideType != Ride_type::foot)
-						P->feul = 10;
+					switch (it->RideType)
+					{
+					case horse:
+						P->Set_P_Horse_State();
+						break;
+					case motercycle:
+						P->Set_P_MotorCycle_State();
+						break;
+					}
+					P->AddFeul();
 				}
 			}
 		}

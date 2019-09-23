@@ -17,7 +17,6 @@ Trash::Trash(T_Trash_Type T)
 
 void TrasgManager::Make_Trash()
 {
-	int num = 0;
 	bool b = true;
 	for (int i = 0; i < 30; i++)
 	{
@@ -46,6 +45,20 @@ void TrasgManager::Make_Trash()
 		b = !b;
 	}
 
+	Set_Trash_Pos();
+}
+
+void TrasgManager::Delete_Trash()
+{
+	for (auto it : Trashs)
+		delete it;
+	Trashs.clear();
+}
+
+void TrasgManager::Set_Trash_Pos()
+{
+	int num = 0;
+
 	// °¡·Î
 	for (int j = 1; j <= 3; j++)
 	{
@@ -66,11 +79,4 @@ void TrasgManager::Make_Trash()
 			num++;
 		}
 	}
-}
-
-void TrasgManager::Delete_Trash()
-{
-	for (auto it : Trashs)
-		delete it;
-	Trashs.clear();
 }

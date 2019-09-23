@@ -1,6 +1,9 @@
 #pragma once
 #include "Types.h"
 #include "Label.h"
+
+//남은 총알수는 여기서 세주고 UI에서 라벨 띄우기
+//남은 적수는 여기서 세주고 라벨띄우는건 UI에서
 class GM : public Singleton<GM>
 {
 public:
