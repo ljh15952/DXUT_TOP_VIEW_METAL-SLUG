@@ -108,7 +108,6 @@ void UI::SetNextScriptUI()
 	{
 		name[0]->_visible = true;
 		name[1]->_visible = false;
-		cout << "ASDASD ?";
 	}
 	else
 	{

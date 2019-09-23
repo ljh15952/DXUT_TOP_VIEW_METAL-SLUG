@@ -166,7 +166,6 @@ void EnemyManager::Delete_Enemys()
 	for (auto it : _enemys)
 	{
 		delete it;
-		cout << "ASDASD" << endl;
 	}
 	_enemys.clear();
 }
