@@ -203,6 +203,9 @@
     <ClCompile Include="Trash.cpp">
       <Filter>GAME\OBJ\Trash</Filter>
     </ClCompile>
+    <ClCompile Include="RealMainScene.cpp">
+      <Filter>GAME\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -267,6 +270,9 @@
     </ClInclude>
     <ClInclude Include="Trash.h">
       <Filter>GAME\OBJ\Trash</Filter>
+    </ClInclude>
+    <ClInclude Include="RealMainScene.h">
+      <Filter>GAME\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

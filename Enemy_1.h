@@ -6,6 +6,7 @@ class Enemy_1 : public Obj
 {
 public:
 	Enemy_1();
+	~Enemy_1();
 	void Attack() override;
 	void Movement() override;
 	void Update() override;

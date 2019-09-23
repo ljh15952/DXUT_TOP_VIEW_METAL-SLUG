@@ -392,6 +392,7 @@
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RealMainScene.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Sound.cpp" />
@@ -408,6 +409,7 @@
     <ClInclude Include="Node.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RealMainScene.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sound.h" />

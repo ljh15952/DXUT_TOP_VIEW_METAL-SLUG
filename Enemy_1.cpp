@@ -23,6 +23,11 @@ Enemy_1::Enemy_1()
 	isDie = false;
 }
 
+Enemy_1::~Enemy_1()
+{
+	delete mini;
+}
+
 void Enemy_1::Attack()
 {
 	atktimer -= Time::deltaTime;
@@ -159,7 +164,10 @@ void EnemyManager::SetEnemy(vector2 pos, Ride_type rt)
 void EnemyManager::Delete_Enemys()
 {
 	for (auto it : _enemys)
+	{
 		delete it;
+		cout << "ASDASD" << endl;
+	}
 	_enemys.clear();
 }
 

@@ -25,5 +25,7 @@ public:
 
 	int scriptnum;
 	int clicknum;
+
+	void DeleteUI();
 };
 

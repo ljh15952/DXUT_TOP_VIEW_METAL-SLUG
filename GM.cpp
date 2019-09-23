@@ -163,3 +163,17 @@ void GM::SetYoudoGunLabel(int a)
 {
     remainyoudo->Create_Label(a);
 }
+
+void GM::deleteLabel()
+{
+	timer->Delete_Label();
+	delete timer;
+	remainpistol->Delete_Label();
+	delete remainpistol;
+	remainmachine->Delete_Label();
+	delete remainmachine;
+	remainyoudo->Delete_Label();
+	delete remainyoudo;
+	EnemyRemainLabel->Delete_Label();
+	delete EnemyRemainLabel;
+}

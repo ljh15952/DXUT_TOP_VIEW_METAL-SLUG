@@ -6,6 +6,7 @@ class Player : public Obj
 {
 public:
 	Player();
+	~Player();
 	void Movement() override;
 	void Attack() override;
 	void Update() override;

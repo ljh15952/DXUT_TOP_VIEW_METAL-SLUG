@@ -10,7 +10,6 @@ void Label::Create_Label(int str)
 	for (auto it : to_wstring(str))
 	{
 		Sprite* s = new Sprite;
-		cout << _scale.x << endl;
 		s->_scale = _scale;
 		s->isUI = true;
 		s->Create(L"font/" + to_wstring(it - 48) + L".png");

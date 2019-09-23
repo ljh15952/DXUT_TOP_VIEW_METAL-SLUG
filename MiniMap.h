@@ -6,10 +6,10 @@ class MiniMap : public Sprite
 {
 public:
 	MiniMap(Player* p);
+	~MiniMap();
 	void Update() override;
 	Sprite* player;
 
 	Player* P;
-	vector<Sprite*> E;
 };
 

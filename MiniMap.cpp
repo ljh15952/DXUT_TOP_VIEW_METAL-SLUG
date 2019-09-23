@@ -19,6 +19,11 @@ MiniMap::MiniMap(Player * p)
 
 }
 
+MiniMap::~MiniMap()
+{
+	delete player;
+}
+
 void MiniMap::Update()
 {
 	if (!GM::GetInstance()->isgamestart)

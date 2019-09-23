@@ -1,6 +1,6 @@
 #include "DXUT.h"
 #include "MainScene.h"
-
+#include "RealMainScene.h"
 
 //보스전기획
 //보스구현
@@ -281,12 +281,29 @@ void MainScene::Update()
 	{
 		P->isshot = false;
 	}
-
-	
-
 }
 
 void MainScene::OnExit()
 {
+	delete P;
+	delete S2;
+	delete Minimap;
+	delete feulSp;
+	EnemyManager::GetInstance()->Delete_Enemys();
+	TrasgManager::GetInstance()->Delete_Trash();
+	Bullet_Manager::GetInstance()->Delete_Bullet();
+	UI::GetInstance()->DeleteUI();
+	GM::GetInstance()->deleteLabel();
+	for (auto it : kick)
+	{
+		delete it;
+	}
+	kick.clear();
+
+	for (auto it : walls)
+	{
+		delete it;
+	}
+	walls.clear();
 }
 

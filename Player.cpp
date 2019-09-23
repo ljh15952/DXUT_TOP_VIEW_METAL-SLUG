@@ -49,6 +49,12 @@ Player::Player()
 	bisnum = 0;
 }
 
+Player::~Player()
+{
+	delete ShotPos;
+	delete dieeft;
+}
+
 void Player::Movement()
 {
 	iscol = false;

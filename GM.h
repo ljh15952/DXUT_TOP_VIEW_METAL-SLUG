@@ -31,6 +31,8 @@ public:
 	Label* remainmachine;
 	Label* remainyoudo;
 
+	void deleteLabel();
+
 	bool isshake;
 
 };

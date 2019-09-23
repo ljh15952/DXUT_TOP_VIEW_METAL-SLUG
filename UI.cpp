@@ -117,4 +117,24 @@ void UI::SetNextScriptUI()
 	}
 	
 }
+
+void UI::DeleteUI()
+{
+	for (int i = 0; i < 3; i++)
+	{
+		delete weapons[i];
+		delete Hp[i];
+	}
+
+	for (int i = 0; i < 2; i++)
+	{
+		delete profile[i];
+		delete name[i];
+		delete script[i];
+	}
+
+	delete mission;
+	delete missionText;
+	delete blackback;
+}
      

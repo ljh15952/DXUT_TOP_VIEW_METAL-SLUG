@@ -7,7 +7,7 @@
 #include "resource.h"
 #include "Director.h"
 #include "MainScene.h"
-
+#include "RealMainScene.h"
 
 //--------------------------------------------------------------------------------------
 // Create any D3D9 resources that will live through a device reset (D3DPOOL_MANAGED)
@@ -90,7 +90,7 @@ int main()
 	DXUTCreateDevice(true, 1280, 720);
 
 
-	Director::GetInstance()->ChangeScene(new MainScene);
+	Director::GetInstance()->ChangeScene(new RealMainScene);
 
 
 	// Start the render loop
