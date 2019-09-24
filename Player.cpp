@@ -57,7 +57,7 @@ Player::~Player()
 void Player::Movement()
 {
 	iscol = false;
-	if ((_position.x >= 9850 || _position.y >= 9850) || (_position.x <= 0 || _position.y <= 0))
+	if ((_position.x >= 7518 || _position.y >= 7169) || (_position.x <= 0 || _position.y <= 0))
 	{
 		_position -= v * (Speed + 0.1f);
 		iscol = true;

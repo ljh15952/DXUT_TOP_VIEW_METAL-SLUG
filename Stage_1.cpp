@@ -25,11 +25,11 @@ Stage_1::Stage_1()
 
 
 	P = new Player;
-	P->_position = { 1600,2300 };
+	P->_position = { 2000,1800 };
 	this->AddChild(P, 1);
 
 	S2 = new Sprite;
-	S2->Create(L"asd.png");
+	S2->Create(L"stage_1/map.png");
 	S2->_pivot = { 0,0 };
 	this->AddChild(S2, 0);
 
@@ -51,24 +51,26 @@ Stage_1::Stage_1()
 	for (int i = 0; i < 13; i++)
 	{
 		Sprite* w = new Sprite;
-		w->Create(L"w.png");
+		w->Create(L"w2.png");
 		w->_visible = false;
 		walls.push_back(w);
 	}
-	walls[0]->_position = { 1150,1000 };
-	walls[1]->_position = { 6150,1000 };
-	walls[2]->_position = { 8650,1000 };
-	walls[3]->_position = { 3650,3600 };
-	walls[4]->_position = { 6200,3600 };
-	walls[5]->_position = { 8550,3600 };
-	walls[6]->_position = { 1250,6150 };
-	walls[7]->_position = { 3670,6150 };
-	walls[8]->_position = { 8650,6150 };
-	walls[9]->_position = { 1250,8750 };
-	walls[10]->_position = { 3670,8750 };
-	walls[11]->_position = { 6200,8750 };
-	walls[12]->_position = { 8670,8730 };
-	//
+	walls[0]->_position = { 402.116 + 675,347.52 + 675 };
+	walls[1]->_position = { 2198.77 + 675,347.52 + 675 };
+	walls[2]->_position = { 4002.22 + 675,347.52 + 675 };
+	walls[3]->_position = { 5782.11 + 675,347.52 + 675 };
+
+	walls[4]->_position = { 402.116 + 675,2059.2 + 675 };
+	walls[5]->_position = { 2198.77 + 675,2059.2 + 675 };
+	walls[6]->_position = { 4002.22 + 675,2059.2 + 675 };
+	walls[7]->_position = { 5782.11 + 675,2059.2 + 675 };
+
+	walls[8]->_position = { 5782.11 + 675,3759 + 675 };
+	walls[9]->_position = { 402.116 + 675,5470.13 + 675 };
+	walls[10]->_position = { 2198.77 + 675,5470.13 + 675 };
+	walls[12]->_position = { 4002.22 + 675,5470.13 + 675 };
+	walls[11]->_position = { 5782.11 + 675,5470.13 + 675 };
+	////
 
 
 	TrasgManager::GetInstance()->Make_Trash();
@@ -243,6 +245,8 @@ void Stage_1::Update()
 	Camera::GetInstance()->Update();
 	Camera::GetInstance()->SetTransform();
 	//
+	if(DXUTWasKeyPressed('F'))
+		cout << P->_position.x << " " << P->_position.y << endl;
 
 	GM::GetInstance()->UpdateTimer();
 

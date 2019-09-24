@@ -3,10 +3,10 @@
 
 MiniMap::MiniMap(Player * p)
 {
-	Create(L"asd.png");
+	Create(L"stage_1/map.png");
 	_pivot = { 1,0 };
 	_position = { 1280,0 };
-	_scale = { 0.03f,0.03f };
+	_scale = { 0.035f,0.035f };
 	isUI = true;
 
 
@@ -14,7 +14,7 @@ MiniMap::MiniMap(Player * p)
 	player = new Sprite;
 	player->Create(L"a/pistol/Handgun_Walk 1.png");
 	player->isUI = true;
-	player->_position = { _position.x - (9850 * 0.03f) + (P->_position.x * 0.03f) ,(P->_position.y * 0.03f) };
+	player->_position = { _position.x - (7518 * _scale.x) + (P->_position.x * _scale.x) ,(P->_position.y * _scale.y) };
 	player->_scale = { 0.5f,0.5f };
 
 }
@@ -39,7 +39,7 @@ void MiniMap::Update()
 		if (it->_visible)
 		{
 			it->mini->_rotation = it->_rotation;
-			it->mini->_position = { _position.x - (9850 * 0.03f) + (it->_position.x * 0.03f) ,(it->_position.y * 0.03f) };
+			it->mini->_position = { _position.x - (7518 * _scale.x) + (it->_position.x * _scale.x) ,(it->_position.y * _scale.y) };
 		}
 	}
 }
