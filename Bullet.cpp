@@ -33,8 +33,16 @@ void Bullet::Update()
 
 bool Bullet::isScreenOut()
 {
-	if ((_position.x >= 9850 || _position.y >= 9850) || (_position.x <= 0 || _position.y <= 0))
-		return true;
+	if (GM::GetInstance()->stagenum == 1)
+	{
+		if ((_position.x >= 9850 || _position.y >= 9850) || (_position.x <= 0 || _position.y <= 0))
+			return true;
+	}
+	else
+	{
+		if ((_position.x >= 6500 * 2.5f || _position.y >= (720 * 2.5f)) || (_position.x <= 0 || _position.y <= 0))
+			return true;
+	}
 	return false;
 }
 
@@ -67,7 +75,10 @@ void Bullet::E_Movement()
 
 void Bullet::CommonBulletMove()
 {
-	_position += _v * 30;
+	if(_mytype == shot_enemy)
+		_position += _v * 10;
+	else
+		_position += _v * 30;
 }
 //쓰래기하고 적총알하고 맞으면 없어지는듯
 void Bullet::YoudoBulletMove()
@@ -122,6 +133,9 @@ void Bullet::SetBullet()
 	case enemy:
 		Create(L"E/w/Mine.png");
 		break;
+	case shot_enemy:
+		Create(L"S_A.png");
+		break;
 	}
 
 	DieAnipath = L"explose/Explosion ";
@@ -143,7 +157,7 @@ void Bullet_Manager::Shot_Bullet(vector2 startpos, vector2 v, T_My_Type mt, P_sh
 {
 	for (auto it : _bullets)
 	{
-		if (!it->_visible)
+		if (!it->_visible && !it->isHit)
 		{
 			it->_position = startpos;
 			it->_v = v;

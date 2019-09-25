@@ -12,7 +12,6 @@ void Renderer::Render()
 	_rendertargets.sort(Comp);
 	for (auto it : _rendertargets)
 	{
-	//	cout << "ASDASD" << endl;
 		it->Draw();
 		it->Update();
 	}

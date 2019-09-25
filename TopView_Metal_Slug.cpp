@@ -8,7 +8,6 @@
 #include "Director.h"
 #include "MainScene.h"
 #include "RealMainScene.h"
-
 //--------------------------------------------------------------------------------------
 // Create any D3D9 resources that will live through a device reset (D3DPOOL_MANAGED)
 // and aren't tied to the back buffer size
@@ -85,12 +84,14 @@ int main()
 	// Initialize DXUT and create the desired Win32 window and Direct3D device for the application
 	DXUTInit(true, true); // Parse the command line and show msgboxes
 	DXUTSetHotkeyHandling(true, true, true);  // handle the default hotkeys
-	DXUTSetCursorSettings(true, true); // Show the cursor and clip it when in full screen
+	DXUTSetCursorSettings(false, false); // Show the cursor and clip it when in full screen
 	DXUTCreateWindow(L"Seoul_Homework");
 	DXUTCreateDevice(true, 1280, 720);
 
 
-	Director::GetInstance()->ChangeScene(new RealMainScene);
+	//Director::GetInstance()->ChangeScene(new RealMainScene);
+	Director::GetInstance()->ChangeScene(new MainScene);
+
 
 
 	// Start the render loop

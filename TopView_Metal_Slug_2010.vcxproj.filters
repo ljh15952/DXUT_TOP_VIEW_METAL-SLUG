@@ -99,6 +99,24 @@
     <Filter Include="GAME\Stages\Stage_3">
       <UniqueIdentifier>{a7e24a47-1787-4a6c-839c-5b75aa6b81c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GAME\Script">
+      <UniqueIdentifier>{899df37b-bfea-4a15-9458-2b5d679a4430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME\Script\Stage_1_Script">
+      <UniqueIdentifier>{261a89d5-0703-409d-990f-4cb3f31f52c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME\Script\Stage_2_Script">
+      <UniqueIdentifier>{5ecf526c-0c99-4cee-8f6b-fd0ff38195f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME\Script\Stage_3_Script">
+      <UniqueIdentifier>{9641f8cb-184c-4697-b7b4-80fe6ecc903d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME\OBJ\ShotEnemy">
+      <UniqueIdentifier>{66bb3b55-73e3-4d62-82b1-f53745d86baf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME\Stages\minigame">
+      <UniqueIdentifier>{ad3b2c25-027d-4d3f-a2e1-9893abf20cad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -233,6 +251,18 @@
     <ClCompile Include="Stage_3.cpp">
       <Filter>GAME\Stages\Stage_3</Filter>
     </ClCompile>
+    <ClCompile Include="Script.cpp">
+      <Filter>GAME\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_1_Script.cpp">
+      <Filter>GAME\Script\Stage_1_Script</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotEnemy.cpp">
+      <Filter>GAME\OBJ\ShotEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="minigame.cpp">
+      <Filter>GAME\Stages\minigame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -312,6 +342,18 @@
     </ClInclude>
     <ClInclude Include="Stage_3.h">
       <Filter>GAME\Stages\Stage_3</Filter>
+    </ClInclude>
+    <ClInclude Include="Script.h">
+      <Filter>GAME\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_1_Script.h">
+      <Filter>GAME\Script\Stage_1_Script</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotEnemy.h">
+      <Filter>GAME\OBJ\ShotEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="minigame.h">
+      <Filter>GAME\Stages\minigame</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

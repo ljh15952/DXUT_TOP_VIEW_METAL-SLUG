@@ -13,7 +13,7 @@ class Stage_1 :
 {
 public:
 	Stage_1();
-	~Stage_1();
+	void Clear() override;
 	void Collide() override;
 	void Update() override;
 private:

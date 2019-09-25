@@ -1,9 +1,9 @@
 #include "DXUT.h"
 #include "Player.h"
 
-Player::Player()
+Player::Player(wstring path, Ride_type rt)
 {
-	Create(L"a/Walk/AR_walk 1.png");
+	Create(path);
 	_scale = { 1.7f,1.7f };
 
 	ShotPos = new Sprite;
@@ -24,7 +24,7 @@ Player::Player()
 	feul = 0;
 	speedLimit = 10;
 
-	RideType = Ride_type::foot;
+	RideType = rt;
 	shot_type = P_shot_type::pistol;
 	_mytype = T_My_Type::player;
 
@@ -57,13 +57,26 @@ Player::~Player()
 void Player::Movement()
 {
 	iscol = false;
-	if ((_position.x >= 7518 || _position.y >= 7169) || (_position.x <= 0 || _position.y <= 0))
+	/*if (GM::GetInstance()->stagenum == 1)
 	{
-		_position -= v * (Speed + 0.1f);
-		iscol = true;
+		if ((_position.x >= 7518 || _position.y >= 7169) || (_position.x <= 0 || _position.y <= 0))
+		{
+			_position -= v * (Speed + 0.1f);
+			iscol = true;
+		}
+		v = { (float)Director::GetInstance()->p.x - 640,(float)Director::GetInstance()->p.y - 360 };
 	}
+	else
+	{
+		if ((_position.x >= 6500 * 2.5f || _position.y >= (720*2.5f) - 550) || (_position.x <= 0 || _position.y <= 550))
+		{
+			_position -= v * (Speed + 0.1f);
+			iscol = true;
+		}
+		v = { (float)Director::GetInstance()->p.x - 640 + 500,(float)Director::GetInstance()->p.y - 360 };
+	}*/
+	v = { (float)Director::GetInstance()->p.x - 640,(float)Director::GetInstance()->p.y - 360 };
 
-	v = { (float)Director::GetInstance()->p.x - 640 ,(float)Director::GetInstance()->p.y - 360 };
 	_rotation = atan2(v.y, v.x);
 
 	float l = sqrt(v.x * v.x + v.y * v.y);
@@ -159,11 +172,16 @@ void Player::Update()
 	if (!GM::GetInstance()->isgamestart)
 		return;
 
-	Feul_Manage();
+	if(GM::GetInstance()->stagenum ==1)
+		Feul_Manage();
 
 	if (ishit)
 		Invincible_time();
 
+	if (GM::GetInstance()->stagenum == 2)
+	{
+		RideType = boat_ride;
+	}
 
 	Movement();
 	SetPlayerAnimation();
@@ -178,10 +196,10 @@ void Player::isHit()
 
 	ishit = true;
 
-	UI::GetInstance()->SetHpUI(--Hp);
+	//UI::GetInstance()->SetHpUI(--Hp);
 
-	if (Hp <= 0)
-		isdie = true;
+	if (Hp <= 0);
+		//isdie = true;
 }
 
 void Player::Invincible_time()

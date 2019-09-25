@@ -37,6 +37,6 @@ public:
 	void deleteLabel();
 
 	bool isshake;
-
+	int stagenum;
 };
 

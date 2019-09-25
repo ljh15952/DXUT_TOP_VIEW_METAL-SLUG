@@ -1,8 +1,9 @@
 #pragma once
-#include "Sprite.h"
-class Stage : public Sprite
+class Stage
 {
 public:
 	virtual void Collide() {};
+	virtual void Update() {};
+	virtual void Clear() {};
 };
 

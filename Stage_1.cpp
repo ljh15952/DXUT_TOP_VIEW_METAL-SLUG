@@ -1,6 +1,15 @@
 #include "DXUT.h"
 #include "Stage_1.h"
+#include "MainScene.h"
 
+//GM하고 UI어떠케좀 해봐ㅡㅡ;
+//스크립트어케짜지
+//isscript일때 게임을 잠깐 멈추고
+//스크립트가뜸 스크립트들은 전부 vector안에 들어있는 형식
+//클릭한번에
+//Sprite * nowscript;
+//nowscript = script[++num]; 이런식으로
+//nowspeak = speak[++num]; 이런식으로
 Stage_1::Stage_1()
 {
 	for (int i = 0; i < 10; i++)
@@ -24,14 +33,13 @@ Stage_1::Stage_1()
 	kick[9]->_position = { 1010.59,7569.32 };
 
 
-	P = new Player;
+	P = new Player(L"a/Walk/AR_walk 1.png",foot);
 	P->_position = { 2000,1800 };
-	this->AddChild(P, 1);
+	P->_layer = 1;
 
 	S2 = new Sprite;
 	S2->Create(L"stage_1/map.png");
 	S2->_pivot = { 0,0 };
-	this->AddChild(S2, 0);
 
 
 	feulSp = new Sprite;
@@ -85,13 +93,13 @@ Stage_1::Stage_1()
 
 	UI::GetInstance()->UI_Init();
 	GM::GetInstance()->GMInit();
-
-
-	AddRenderTarget();
+	GM::GetInstance()->stagenum = 1;
+	GM::GetInstance()->isgamestart = true;
 }
 
-Stage_1::~Stage_1()
+void Stage_1::Clear()
 {
+	cout << "123" << endl;
 	delete P;
 	delete S2;
 	delete Minimap;
@@ -218,24 +226,7 @@ void Stage_1::Collide()
 
 	}
 
-	if (Director::GetInstance()->OnMouseDown())
-	{
-		P->isshot = true;
-		P->shot_timer = 0;
-
-		if (UI::GetInstance()->isScript)
-		{
-			UI::GetInstance()->SetNextScriptUI();
-		}
-	}
-	else if (Director::GetInstance()->OnMouse())
-	{
-		P->Attack();
-	}
-	else if (Director::GetInstance()->OnMouseUp())
-	{
-		P->isshot = false;
-	}
+	
 }
 
 void Stage_1::Update()
@@ -252,4 +243,25 @@ void Stage_1::Update()
 
 	feulSp->_scale.x = P->feul / 10;
 
+	if (Director::GetInstance()->OnMouseDown())
+	{
+		P->isshot = true;
+		P->shot_timer = 0;
+
+		//if (UI::GetInstance()->isScript)
+		//{
+		//	UI::GetInstance()->SetNextScriptUI();
+		//}
+	}
+	else if (Director::GetInstance()->OnMouse())
+	{                                                              
+		P->Attack();
+	}
+	else if (Director::GetInstance()->OnMouseUp())
+	{
+		P->isshot = false;
+	}
+
+	if (DXUTWasKeyPressed('E'))
+		Director::GetInstance()->ChangeScene(new MainScene);
 }

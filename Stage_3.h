@@ -8,6 +8,7 @@ public:
 	~Stage_3();
 	void Collide() override;
 	void Update() override;
+	void Clear() override;
 
 };
 

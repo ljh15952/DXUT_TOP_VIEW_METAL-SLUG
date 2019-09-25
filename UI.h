@@ -11,15 +11,11 @@ public:
 	Sprite* missionText;
 	Sprite* Hp[3];
 	Sprite* profile[2];
-	Sprite* blackback;
-	Sprite* name[2];
-	Sprite* script[2];
 
 	void SetHpUI(int Hp);
 	void SetmissinUI();
 	void SetmissionTextUI();
 	void SetprofileUI();
-	void SetNextScriptUI();
 
 	bool isScript;
 

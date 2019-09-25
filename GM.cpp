@@ -34,6 +34,7 @@ void GM::GMInit()
 	remainyoudo->_scale = { 0.7f,0.7f };
 	remainyoudo->_position = { 280,30 };
 	remainyoudo->Create_Label(0);
+
 }
 
 void GM::SpawnEnemy(int missionnum)

@@ -5,7 +5,7 @@
 class Player : public Obj
 {
 public:
-	Player();
+	Player(wstring path, Ride_type rt);
 	~Player();
 	void Movement() override;
 	void Attack() override;

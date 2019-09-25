@@ -388,6 +388,7 @@
     <ClCompile Include="Enemy_1.cpp" />
     <ClCompile Include="GM.cpp" />
     <ClCompile Include="MainScene.cpp" />
+    <ClCompile Include="minigame.cpp" />
     <ClCompile Include="MiniMap.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Obj.cpp" />
@@ -395,10 +396,13 @@
     <ClCompile Include="RealMainScene.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Script.cpp" />
+    <ClCompile Include="ShotEnemy.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Stage_1.cpp" />
+    <ClCompile Include="Stage_1_Script.cpp" />
     <ClCompile Include="Stage_2.cpp" />
     <ClCompile Include="Stage_3.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -409,6 +413,7 @@
     <ClInclude Include="Enemy_1.h" />
     <ClInclude Include="GM.h" />
     <ClInclude Include="MainScene.h" />
+    <ClInclude Include="minigame.h" />
     <ClInclude Include="MiniMap.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Obj.h" />
@@ -416,10 +421,13 @@
     <ClInclude Include="RealMainScene.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Script.h" />
+    <ClInclude Include="ShotEnemy.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="Stage_1.h" />
+    <ClInclude Include="Stage_1_Script.h" />
     <ClInclude Include="Stage_2.h" />
     <ClInclude Include="Stage_3.h" />
     <ClInclude Include="Texture.h" />
