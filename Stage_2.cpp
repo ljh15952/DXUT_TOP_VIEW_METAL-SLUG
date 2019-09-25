@@ -2,6 +2,16 @@
 #include "Stage_2.h"
 #include "Bullet.h"
 #include "UI.h"
+
+//암초설치
+//암초안부서짐
+//템들은어케할까
+//보트설치
+//보트는 나를향해 3방향 총쏨
+//일정시간마다 비행기가 나와 폭탄을 떨어뜨림
+//여기까지 2스테이지 대~충
+//UI작업..하..
+
 Stage_2::Stage_2()
 {
 	cout << "STAGE_2 START " << endl;
@@ -14,22 +24,31 @@ Stage_2::Stage_2()
 
 	player = new Player(L"m/MotorCycle 1.png", motercycle);
 	player->_position = { 100,1000 };
-
+	player->_layer = 3;
 	//s = new Stage_1_Script;
-	
+
 	for (int i = 0; i < 50; i++)
 	{
 		Shotenemy[i] = new ShotEnemy(player);
 		Shotenemy[i]->_scale = { 2,2 };
 		Shotenemy[i]->_rotation = 1.5f;
 		Shotenemy[i]->_position = { 100 + float(500 * i),450 };
+
+		Rock[i] = new Sprite;
+		Rock[i]->Create(L"r.png");
+		Rock[i]->_position = { 500 + float((rand()%550)*i),550 + float(rand() %700)};
+		float sosu = rand() % 5;
+		sosu /= 10;
+		float sosu2 = rand() % 5;
+		sosu2 /= 10;
+		Rock[i]->_scale = { 1 - sosu,1 - sosu2 };
 	}
 	for (int i = 50; i < 100; i++)
 	{
 		Shotenemy[i] = new ShotEnemy(player);
 		Shotenemy[i]->_scale = { 2,2 };
 		Shotenemy[i]->_rotation = -1.5f;
-		Shotenemy[i]->_position = { 100 + float(500 * (i-50)),1350 };
+		Shotenemy[i]->_position = { 100 + float(500 * (i - 50)),1350 };
 	}
 
 
@@ -54,19 +73,61 @@ void Stage_2::Clear()
 
 void Stage_2::Collide()
 {
+	//for (auto it : Bullet_Manager::GetInstance()->_bullets)
+	//{
+	//	if (it->_visible && !it->isHit)
+	//	{
+	//		if(!player->isJump)
+	//			it->CollideBullet(player);
+
+	//		for (int i = 0; i < 100; i++)
+	//		{
+	//			if (Shotenemy[i]->_visible && !Shotenemy[i]->isDie)
+	//			{
+	//				RECT r;
+	//				if (IntersectRect(&r, &Shotenemy[i]->GetRect(), &it->GetRect()))
+	//				{
+	//					it->CollideBullet(Shotenemy[i]);
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
 	for (auto it : Bullet_Manager::GetInstance()->_bullets)
 	{
-		if (it->_visible && !it->isHit)
+		for (int i = 0; i < 100; i++)
 		{
-			if(!player->isJump)
-				it->CollideBullet(player);
+			if (it->_visible && !it->isHit)
+			{
+				if (Shotenemy[i]->_visible && !Shotenemy[i]->isDie)
+				{
+					it->CollideBullet(player);
 
-			for (int i = 0; i < 100; i++)
+					if (Shotenemy[i]->_visible)
+					{
+						it->CollideBullet(Shotenemy[i]);
+					}
+				}
+			}
+		}
+
+		for (int i = 0; i < 50; i++)
+		{
+			if (it->_visible && !it->isHit)
 			{
 				RECT r;
-				if (IntersectRect(&r, &Shotenemy[i]->GetRect(), &it->GetRect()))
+				if (IntersectRect(&r, &Rock[i]->GetRect(), &it->GetRect()))
 				{
-					it->CollideBullet(Shotenemy[i]);
+					it->isHit = true;
+				}
+			}
+			if (!player->ishit)
+			{
+				RECT r;
+				if (IntersectRect(&r, &Rock[i]->GetRect(), &player->GetRect()))
+				{
+					cout << "ASDASDDS" << endl;
+					player->ishit = true;
 				}
 			}
 		}

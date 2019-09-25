@@ -14,8 +14,12 @@ private:
 	Player* player;
 	ShotEnemy* Shotenemy[40];
 	Label* Scorelabel;
+	Sprite* m;
+	Sprite* enerygy;
 	int scorenum;
 	vector<ShotEnemy*> e;
 	float timer = 1;
+
+	bool istracer;
 };
 

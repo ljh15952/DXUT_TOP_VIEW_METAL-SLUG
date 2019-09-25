@@ -27,9 +27,9 @@
 
 void MainScene::Init()
 {
-	stage = new minigame;
+	//stage = new minigame;
 
-	//stage = new Stage_2;
+	stage = new Stage_2;
 //	stage = new Stage_1;
 }
 

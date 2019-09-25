@@ -5,13 +5,13 @@ minigame::minigame()
 {
 	player = new Player(L"m/MotorCycle 1.png", motercycle);
 	player->_position = { 500,500 };
-
+	player->_scale = { 0.5f,0.5f };
 	for (int i = 0; i < 10; i++)
 	{
 		Shotenemy[i] = new ShotEnemy(player);
 		Shotenemy[i]->_scale = { 2,2 };
 		Shotenemy[i]->_rotation = 1.5f;
-		Shotenemy[i]->_position = { 0 + float(100 * i),-50 };
+		Shotenemy[i]->_position = { 100 + float(100 * i),50 };
 		e.push_back(Shotenemy[i]);
 	}
 	for (int i = 0; i < 10; i++)
@@ -19,16 +19,7 @@ minigame::minigame()
 		Shotenemy[i] = new ShotEnemy(player);
 		Shotenemy[i]->_scale = { 2,2 };
 		Shotenemy[i]->_rotation = 1.5f;
-		Shotenemy[i]->_position = { -50,0 + float(100 * i) };
-		e.push_back(Shotenemy[i]);
-
-	}
-	for (int i = 0; i < 10; i++)
-	{
-		Shotenemy[i] = new ShotEnemy(player);
-		Shotenemy[i]->_scale = { 2,2 };
-		Shotenemy[i]->_rotation = 1.5f;
-		Shotenemy[i]->_position = { 950,0 + float(100 * i) };
+		Shotenemy[i]->_position = { 50,100 + float(100 * i) };
 		e.push_back(Shotenemy[i]);
 
 	}
@@ -37,10 +28,31 @@ minigame::minigame()
 		Shotenemy[i] = new ShotEnemy(player);
 		Shotenemy[i]->_scale = { 2,2 };
 		Shotenemy[i]->_rotation = 1.5f;
-		Shotenemy[i]->_position = { 0 + float(100 * i),950 };
+		Shotenemy[i]->_position = { 1050,100 + float(100 * i) };
 		e.push_back(Shotenemy[i]);
 
 	}
+	for (int i = 0; i < 10; i++)
+	{
+		Shotenemy[i] = new ShotEnemy(player);
+		Shotenemy[i]->_scale = { 2,2 };
+		Shotenemy[i]->_rotation = 1.5f;
+		Shotenemy[i]->_position = { 100 + float(100 * i),1050 };
+		e.push_back(Shotenemy[i]);
+
+	}
+
+	m = new Sprite;
+	m->Create(L"SpeedUp.png");
+	m->_scale = { 0.3f,0.3f };
+	m->isUI = true;
+
+	enerygy = new Sprite;
+	enerygy->Create(L"fuel2.png");
+	enerygy->_position = { 630,370 };
+	enerygy->_pivot = { 0,0 };
+	enerygy->isUI = true;
+
 	timer = 1;
 	scorenum = 0;
 
@@ -55,17 +67,21 @@ minigame::minigame()
 
 	GM::GetInstance()->GMInit();
 	GM::GetInstance()->stagenum = 1;
+
+	istracer = false;
 }
 
 void minigame::Clear()
 {
 	Scorelabel->Delete_Label();
 	delete Scorelabel;
+	delete m;
 	for (auto it : e)
 	{
 		delete it;
 	}
 	e.clear();
+	delete enerygy;
 	GM::GetInstance()->deleteLabel();
 	Bullet_Manager::GetInstance()->Delete_Bullet();
 	delete player;
@@ -89,6 +105,9 @@ void minigame::Update()
 	Camera::GetInstance()->Update();
 	Camera::GetInstance()->SetTransform();
 
+	m->_position = Director::GetInstance()->GetMousePos();
+
+
 	if (player->ishit)
 	{
 		GM::GetInstance()->isgamestart = false;
@@ -98,6 +117,44 @@ void minigame::Update()
 			return;
 		}
 	}
+
+	if (enerygy->_scale.x <= 1 && !istracer)
+	{
+		enerygy->_scale.x += Time::deltaTime;
+		if (enerygy->_scale.x >= 1)
+			enerygy->_scale.x = 1;
+	}
+
+	if (Director::GetInstance()->OnMouseDown())
+	{
+		istracer = true;
+	}
+	else if (Director::GetInstance()->OnMouse())
+	{
+		if (enerygy->_scale.x >= 0)
+		{
+			enerygy->_scale.x -= Time::deltaTime;
+		}
+		else
+		{
+			istracer = false;
+		}
+	}
+	else if (Director::GetInstance()->OnMouseUp())
+	{
+		istracer = false;
+	}
+	if (istracer)
+	{
+		Time::timeScale = 0.1f;
+	}
+	else
+	{
+		Time::timeScale = 1;
+	}
+
+	cout << enerygy->_scale.x << endl;
+
 
 	if (DXUTWasKeyPressed(VK_SPACE))
 		GM::GetInstance()->isgamestart = true;

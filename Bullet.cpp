@@ -43,6 +43,7 @@ bool Bullet::isScreenOut()
 		if ((_position.x >= 6500 * 2.5f || _position.y >= (720 * 2.5f)) || (_position.x <= 0 || _position.y <= 0))
 			return true;
 	}
+
 	return false;
 }
 
@@ -76,7 +77,7 @@ void Bullet::E_Movement()
 void Bullet::CommonBulletMove()
 {
 	if(_mytype == shot_enemy)
-		_position += _v * 10;
+		_position += _v * 300 * Time::deltaTime;
 	else
 		_position += _v * 30;
 }

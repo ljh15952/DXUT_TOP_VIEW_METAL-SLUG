@@ -57,7 +57,7 @@ Player::~Player()
 void Player::Movement()
 {
 	iscol = false;
-	/*if (GM::GetInstance()->stagenum == 1)
+	if (GM::GetInstance()->stagenum == 1)
 	{
 		if ((_position.x >= 7518 || _position.y >= 7169) || (_position.x <= 0 || _position.y <= 0))
 		{
@@ -74,8 +74,7 @@ void Player::Movement()
 			iscol = true;
 		}
 		v = { (float)Director::GetInstance()->p.x - 640 + 500,(float)Director::GetInstance()->p.y - 360 };
-	}*/
-	v = { (float)Director::GetInstance()->p.x - 640,(float)Director::GetInstance()->p.y - 360 };
+	}
 
 	_rotation = atan2(v.y, v.x);
 
@@ -88,7 +87,7 @@ void Player::Movement()
 	{
 		if (DXUTIsKeyDown(VK_SPACE))
 		{
-			if (Speed > 0)
+			if (Speed > 0) 
 				Speed -= cameraaddnum + 0.3f;
 		}
 		else
@@ -134,7 +133,7 @@ void Player::Movement()
 
 
 
-	_position += v * Speed;
+	_position += v * Speed * Time::deltaTime * 50;
 
 	ShotPos->_position = _position + v * 35;
 
