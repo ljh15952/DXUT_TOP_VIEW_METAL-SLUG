@@ -17,12 +17,16 @@ Player::Player(wstring path, Ride_type rt)
 	dieeft->_layer = 1;
 	dieeft->_scale = { 1.5,1.5f };
 
+	FollowPos = new Sprite;
+	FollowPos->Create(L"SpeedUp.png");
+	FollowPos->_layer = 3;
+	FollowPos->_visible = false;
 
 	Hp = 3;
-	Speed = 10;
+	Speed = 20;
 	jumpTimer = 1;
 	feul = 0;
-	speedLimit = 10;
+	speedLimit = 15;
 
 	RideType = rt;
 	shot_type = P_shot_type::pistol;
@@ -108,13 +112,19 @@ void Player::Movement()
 				if (Speed < 3)
 					Speed += cameraaddnum;
 			}
-			else
+			else if(Director::GetInstance()->OnMouse())
 			{
 				if (Speed < speedLimit)
 					Speed += cameraaddnum + 0.3f;
 				if (Speed > speedLimit)
 					Speed -= cameraaddnum + 0.3f;
 			}
+			else
+			{
+				if (Speed > 0)
+					Speed -= cameraaddnum + 0.3f;
+			}
+
 		}
 		if (DXUTWasKeyPressed('Z'))
 			isJump = true;
@@ -145,6 +155,7 @@ void Player::Movement()
 	_position += v * Speed * Time::deltaTime * 50;
 
 	ShotPos->_position = _position + v * 35;
+	FollowPos->_position = _position + v * (Speed*30);
 
 	GM::GetInstance()->SetCameraUpdate(Speed);
 }
@@ -285,7 +296,6 @@ void Player::AddFeul()
 
 void Player::P_Foot_Move_Ani()
 {
-	cout << "ASDASD" << endl;
 	switch (shot_type)
 	{
 	case P_shot_type::pistol:

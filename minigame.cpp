@@ -153,7 +153,6 @@ void minigame::Update()
 		Time::timeScale = 1;
 	}
 
-	cout << enerygy->_scale.x << endl;
 
 
 	if (DXUTWasKeyPressed(VK_SPACE))

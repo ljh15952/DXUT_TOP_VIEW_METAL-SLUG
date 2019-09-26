@@ -24,7 +24,7 @@ private:
 
 	Sprite* feulSp;
 
-
+	Sprite* Follow;
 	vector<Sprite*> kick;
 
 	vector<Sprite*> walls;

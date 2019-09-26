@@ -92,7 +92,7 @@ void GM::SpawnEnemy(int missionnum)
 
 void GM::SetCameraUpdate(float Speed)
 {
-	if (Speed > 9.5f)
+	if (Speed > 2)
 	{
 		CameraSize = { 1280 * Speed / 6.5f, -720 * Speed / 6.5f };
 

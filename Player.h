@@ -13,6 +13,7 @@ public:
 	void isHit() override;
 
 	Sprite* ShotPos;
+	Sprite* FollowPos;
 	Sprite* dieeft;
 
 	P_shot_type shot_type;

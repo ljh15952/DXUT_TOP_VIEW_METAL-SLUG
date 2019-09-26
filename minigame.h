@@ -19,7 +19,7 @@ private:
 	int scorenum;
 	vector<ShotEnemy*> e;
 	float timer = 1;
-
+	vector2 asdas;
 	bool istracer;
 };
 

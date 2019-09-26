@@ -34,7 +34,7 @@ Stage_1::Stage_1()
 
 
 	P = new Player(L"a/Walk/AR_walk 1.png",foot);
-	P->_position = { 2000,1800 };
+	P->_position = { 300,300 };
 	P->_layer = 1;
 
 	S2 = new Sprite;
@@ -86,6 +86,10 @@ Stage_1::Stage_1()
 	Bullet_Manager::GetInstance()->Make_Bullet();
 
 	Minimap = new MiniMap(P);
+
+	Follow = new Sprite;
+	Follow->Create(L"SpeedUp.png");
+	Follow->_position = { 2000,1800 };
 
 	Camera::GetInstance()->CameraInit();
 	Camera::GetInstance()->Follow(P);
@@ -144,6 +148,7 @@ void Stage_1::Collide()
 		RECT TEMP;
 		if (IntersectRect(&TEMP, &P->GetRect(), &it->GetRect()))
 		{
+		//	P->Speed--;
 			P->_position -= P->v * P->Speed;
 			P->iscol = true;
 		}
@@ -231,11 +236,13 @@ void Stage_1::Collide()
 
 void Stage_1::Update()
 {
+	//Follow->GoTo(P->_position, 400);
 	//카메라 업데이트 공통
-	Camera::GetInstance()->SetPos({ P->_position.x , P->_position.y });
+	Camera::GetInstance()->SetPos({ P->FollowPos->_position.x , P->FollowPos->_position.y });
 	Camera::GetInstance()->Update();
 	Camera::GetInstance()->SetTransform();
 	//
+	//플레이어 방향벡터와 스피드 와 현재 포지션
 	if(DXUTWasKeyPressed('F'))
 		cout << P->_position.x << " " << P->_position.y << endl;
 
