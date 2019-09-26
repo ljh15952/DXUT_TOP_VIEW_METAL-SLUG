@@ -22,7 +22,5 @@ private:
 	D3DXMATRIX viewMatrix;
 
 	Node* following;
-
-
 };
 

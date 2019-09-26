@@ -5,16 +5,14 @@
 class Director : public Singleton<Director>
 {
 public:
-	int ClickNum;
-
-	bool OnMouseDown();
-	bool OnMouse();
-	bool OnMouseUp();
-
 	void Init();
 	void Update();
 
 	void ChangeScene(Scene* scene);
+
+	bool OnMouseDown();
+	bool OnMouse();
+	bool OnMouseUp();
 
 	LPD3DXSPRITE GetSprite() { return _sprite; };
 
@@ -23,5 +21,6 @@ public:
 private:
 	static LPD3DXSPRITE _sprite;
 	Scene* _currentScene;
+	int ClickNum;
 };
 

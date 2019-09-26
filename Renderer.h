@@ -12,3 +12,4 @@ private:
 	static bool Comp(Node* a, Node* b);
 };
 
+	
