@@ -170,13 +170,4 @@ void EnemyManager::Delete_Enemys()
 	_enemys.clear();
 }
 
-void EnemyManager::SetOff_Enemy(Enemy_1* e)
-{
-	for (auto it : _enemys)
-	{
-		if (it == e)
-		{
-			it->_visible = false;
-		}
-	}
-}
+

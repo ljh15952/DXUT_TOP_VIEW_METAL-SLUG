@@ -66,9 +66,18 @@ void Player::Movement()
 		}
 		v = { (float)Director::GetInstance()->p.x - 640,(float)Director::GetInstance()->p.y - 360 };
 	}
-	else
+	else if(GM::GetInstance()->stagenum == 2)
 	{
 		if ((_position.x >= 6500 * 2.5f || _position.y >= (720*2.5f) - 550) || (_position.x <= 0 || _position.y <= 550))
+		{
+			_position -= v * (Speed + 0.1f);
+			iscol = true;
+		}
+		v = { (float)Director::GetInstance()->p.x - 640 + 500,(float)Director::GetInstance()->p.y - 360 };
+	}
+	else if (GM::GetInstance()->stagenum == 3)
+	{
+		if ((_position.x >= 13000 * 2.5f || _position.y >= (720 * 2.5f)+550) || (_position.x <= 0 || _position.y <= 550))
 		{
 			_position -= v * (Speed + 0.1f);
 			iscol = true;
@@ -276,6 +285,7 @@ void Player::AddFeul()
 
 void Player::P_Foot_Move_Ani()
 {
+	cout << "ASDASD" << endl;
 	switch (shot_type)
 	{
 	case P_shot_type::pistol:
@@ -316,6 +326,12 @@ void Player::Set_P_Ride_Ani()
 	case horse:
 		Animation(L"h/Horse ", 5, 0.07f, 7);
 		break;
+	case boat_ride :
+		Animation(L"w/w", 8, 0.07f, 27);
+		break;
+	case fly:
+		Create(L"f.png");
+		break;
 	}
 }
 
@@ -324,7 +340,8 @@ void Player::Change_Shot_Type()
 	if (DXUTWasKeyPressed('1'))
 	{
 		shot_type = P_shot_type::pistol;
-		RideType = Ride_type::foot;
+		if(GM::GetInstance()->stagenum==1)
+			RideType = Ride_type::foot;
 	}
 	if (DXUTWasKeyPressed('2'))
 		shot_type = P_shot_type::machine_gun;

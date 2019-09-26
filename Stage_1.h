@@ -8,6 +8,7 @@
 #include "UI.h"
 #include"Trash.h"
 #include "GM.h"
+#include "BoatEnemy.h"
 class Stage_1 :
 	public Stage
 {

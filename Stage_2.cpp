@@ -3,9 +3,6 @@
 #include "Bullet.h"
 #include "UI.h"
 
-//암초설치
-//암초안부서짐
-//템들은어케할까
 //보트설치
 //보트는 나를향해 3방향 총쏨
 //일정시간마다 비행기가 나와 폭탄을 떨어뜨림
@@ -22,7 +19,7 @@ Stage_2::Stage_2()
 	map->_pivot = { 0,0 };
 	map->_scale = { 2.5f,2.5f };
 
-	player = new Player(L"m/MotorCycle 1.png", motercycle);
+	player = new Player(L"w/w1.png", motercycle);
 	player->_position = { 100,1000 };
 	player->_layer = 3;
 	//s = new Stage_1_Script;
@@ -36,7 +33,7 @@ Stage_2::Stage_2()
 
 		Rock[i] = new Sprite;
 		Rock[i]->Create(L"r.png");
-		Rock[i]->_position = { 500 + float((rand()%550)*i),550 + float(rand() %700)};
+		Rock[i]->_position = { 500 + float(((rand()%550)+100)*i),550 + float(rand() %700)};
 		float sosu = rand() % 5;
 		sosu /= 10;
 		float sosu2 = rand() % 5;
@@ -62,7 +59,7 @@ Stage_2::Stage_2()
 	UI::GetInstance()->UI_Init();
 
 	Bullet_Manager::GetInstance()->Make_Bullet();
-
+	BoatEnemyManager::GetInstance()->Make_Enemy();
 }
 
 void Stage_2::Clear()
@@ -73,26 +70,6 @@ void Stage_2::Clear()
 
 void Stage_2::Collide()
 {
-	//for (auto it : Bullet_Manager::GetInstance()->_bullets)
-	//{
-	//	if (it->_visible && !it->isHit)
-	//	{
-	//		if(!player->isJump)
-	//			it->CollideBullet(player);
-
-	//		for (int i = 0; i < 100; i++)
-	//		{
-	//			if (Shotenemy[i]->_visible && !Shotenemy[i]->isDie)
-	//			{
-	//				RECT r;
-	//				if (IntersectRect(&r, &Shotenemy[i]->GetRect(), &it->GetRect()))
-	//				{
-	//					it->CollideBullet(Shotenemy[i]);
-	//				}
-	//			}
-	//		}
-	//	}
-	//}
 	for (auto it : Bullet_Manager::GetInstance()->_bullets)
 	{
 		for (int i = 0; i < 100; i++)
@@ -101,14 +78,23 @@ void Stage_2::Collide()
 			{
 				if (Shotenemy[i]->_visible && !Shotenemy[i]->isDie)
 				{
-					it->CollideBullet(player);
+					if(!player->isJump)
+						it->CollideBullet(player);
 
 					if (Shotenemy[i]->_visible)
-					{
 						it->CollideBullet(Shotenemy[i]);
-					}
 				}
 			}
+		}
+		for (auto it2 : BoatEnemyManager::GetInstance()->_enemys)
+		{
+			if (it2->_visible && !it2->isDie)
+			{
+				if (it->_visible && !it->isHit)
+				{
+					it->CollideBullet(it2);
+				}
+			} 
 		}
 
 		for (int i = 0; i < 50; i++)
@@ -156,6 +142,14 @@ void Stage_2::Update()
 	else if (Director::GetInstance()->OnMouseUp())
 	{
 		player->isshot = false;
+	}
+
+	static float t1 = 1;
+	t1 -= Time::deltaTime;
+	if (t1 < 0)
+	{
+		BoatEnemyManager::GetInstance()->SetEnemy({ player->_position.x + 2000,player->_position.y });
+		t1 = 3;
 	}
 }
 

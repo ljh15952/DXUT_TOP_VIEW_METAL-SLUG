@@ -4,6 +4,7 @@
 #include "GM.h"
 #include "Stage_1_Script.h"
 #include "ShotEnemy.h"
+#include "BoatEnemy.h"
 class Stage_2 : public Stage
 {
 public:

@@ -117,6 +117,12 @@
     <Filter Include="GAME\Stages\minigame">
       <UniqueIdentifier>{ad3b2c25-027d-4d3f-a2e1-9893abf20cad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GAME\OBJ\BoatEnemy">
+      <UniqueIdentifier>{69311f05-b771-4b7d-b391-f627d436b91c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME\OBJ\Boss">
+      <UniqueIdentifier>{fbb98bff-dcf6-4e9a-94c4-e65911710391}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -263,6 +269,12 @@
     <ClCompile Include="minigame.cpp">
       <Filter>GAME\Stages\minigame</Filter>
     </ClCompile>
+    <ClCompile Include="BoatEnemy.cpp">
+      <Filter>GAME\OBJ\BoatEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>GAME\OBJ\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -354,6 +366,12 @@
     </ClInclude>
     <ClInclude Include="minigame.h">
       <Filter>GAME\Stages\minigame</Filter>
+    </ClInclude>
+    <ClInclude Include="BoatEnemy.h">
+      <Filter>GAME\OBJ\BoatEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>GAME\OBJ\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

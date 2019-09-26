@@ -38,9 +38,14 @@ bool Bullet::isScreenOut()
 		if ((_position.x >= 9850 || _position.y >= 9850) || (_position.x <= 0 || _position.y <= 0))
 			return true;
 	}
-	else
+	else if (GM::GetInstance()->stagenum == 2)
 	{
 		if ((_position.x >= 6500 * 2.5f || _position.y >= (720 * 2.5f)) || (_position.x <= 0 || _position.y <= 0))
+			return true;
+	}
+	else
+	{
+		if((_position.x >= 13000 * 2.5f || _position.y >= (720 * 2.5f) + 550)   || (_position.x <= 0 || _position.y <= 550))
 			return true;
 	}
 
@@ -135,6 +140,9 @@ void Bullet::SetBullet()
 		Create(L"E/w/Mine.png");
 		break;
 	case shot_enemy:
+		Create(L"S_A.png");
+		break;
+	case boss:
 		Create(L"S_A.png");
 		break;
 	}

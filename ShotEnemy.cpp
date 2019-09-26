@@ -4,7 +4,7 @@
 ShotEnemy::ShotEnemy(Player* p)
 {
 	Create(L"E/Yakuza 1/Attack/A1.png");
-	Hp = 3;
+	Hp = 1;
 	player = p;
 	_mytype = shot_enemy;
 	isDie = false;
@@ -59,7 +59,6 @@ void ShotEnemy::Update()
 
 void ShotEnemy::isHit()
 {
-	cout << Hp << endl;
 	Hp--;
 	if (Hp < 0)
 	{

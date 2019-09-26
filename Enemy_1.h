@@ -31,7 +31,6 @@ class EnemyManager : public Singleton<EnemyManager>
 public:
 	void Make_Enemy();
 	void SetEnemy(vector2 pos, Ride_type rt);
-	void SetOff_Enemy(Enemy_1 * e);
 	void Delete_Enemys();
 
 	vector<Enemy_1*> _enemys;
